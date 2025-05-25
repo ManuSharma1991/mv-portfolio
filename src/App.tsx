@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import React from 'react';
+import { Box } from '@mui/material';
+
+import Navigation from './components/Navigation';
+import HeroSection from './components/HeroSection';
+import ExpertiseSection from './components/ExpertiseSection/ExpertiseSection';
+import WhyWorkWithMeSection from './components/WhyWorkWithMeSection';
+import AboutMeSection from './components/AboutMeSection';
+import ShowcaseSection from './components/ShowcaseSection';
+import ContactSection from './components/ContactSection';
+import Footer from './components/Footer';
+import ScrollToTopButton from './components/ScrollToTopButton'; // <-- IMPORT
+import ScrollProgressBar from './components/ScrollProgressBar';
+import SectionMinimap from './components/SectionMiniMap';
+
+const globalStyles = {
+  'html': {
+    scrollBehavior: 'smooth',
+  },
+  '*[id]': {
+    scrollMarginTop: '70px', // Adjust based on your AppBar height
+  },
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Box sx={globalStyles} />
+
+      <Navigation />
+      <ScrollProgressBar />
+      <SectionMinimap />
+
+      <Box component="main" sx={{ flexGrow: 1 }}>
+        <HeroSection />
+        <ExpertiseSection />
+        <WhyWorkWithMeSection />
+        <AboutMeSection />
+        <ShowcaseSection />
+        <ContactSection />
+      </Box>
+
+      <Footer />
+      <ScrollToTopButton /> {/* <-- ADD THE COMPONENT HERE */}
+    </Box>
+  );
 }
 
-export default App
+export default App;
