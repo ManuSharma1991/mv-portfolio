@@ -141,7 +141,7 @@ const Navigation: React.FC = () => {
                                     fontWeight: 700,
                                 }}
                             >
-                                MV {/* Or just show the logo/avatar if text is hidden */}
+                                Manu Viswanadha {/* Or just show the logo/avatar if text is hidden */}
                             </Typography>
                         </Box>
 
