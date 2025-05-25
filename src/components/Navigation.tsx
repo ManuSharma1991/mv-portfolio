@@ -150,6 +150,7 @@ const Navigation: React.FC = () => {
                             {navItems.map((item) => (
                                 <Button
                                     key={item.id}
+                                    href={`#${item.id}`}
                                     onClick={() => handleScrollTo(item.id)}
                                     sx={{ color: 'common.white', mx: 1 }}
                                 >

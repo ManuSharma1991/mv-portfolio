@@ -65,6 +65,7 @@ const HeroSection: React.FC = () => {
                     variant="contained"
                     color="secondary" // Uses secondary color from your theme
                     size="large"
+                    href="#contact"
                     onClick={handleScrollToContact}
                     // If using react-scroll:
                     // component={ScrollLink}

@@ -120,6 +120,7 @@ const SectionMinimap: React.FC = () => {
                     <Tooltip title={section.label} placement="left" key={section.id} arrow>
                         <IconButton
                             size="small"
+                            href={`#${section.id}`}
                             onClick={() => handleScrollTo(section.id)}
                             sx={{
                                 p: 0.5, // Padding around the icon to make the clickable area slightly larger
