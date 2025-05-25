@@ -4,13 +4,10 @@ import {
     Container,
     Typography,
     Button,
-    Link as MuiLink, // For external links
-    TextField, // For the future form
     Grid, // For form layout
     Paper, // Optional: To wrap the contact info or form
 } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub'; // Optional
 
 const ContactSection: React.FC = () => {

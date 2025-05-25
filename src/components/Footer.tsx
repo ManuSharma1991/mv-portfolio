@@ -3,7 +3,6 @@ import {
     Box,
     Container,
     Typography,
-    Link as MuiLink, // For external links
     IconButton, // If you want to add social icon buttons
     Stack,      // For arranging social icons
 } from '@mui/material';

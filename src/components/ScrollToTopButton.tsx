@@ -12,7 +12,7 @@ const ScrollToTopButton: React.FC = () => {
         threshold: 200, // Show the button when the user has scrolled down 200px
     });
 
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleClick = () => {
         // The 'event.currentTarget' might be useful if you need to blur or something,
         // but for scrolling, 'window' is the target.
         window.scrollTo({
