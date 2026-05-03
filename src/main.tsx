@@ -25,7 +25,7 @@ if (!rootElement) throw new Error('Failed to find the root element');
 const root = ReactDOM.createRoot(rootElement);
 
 const RootApp: React.FC = () => {
-  const [mode, setMode] = useState<PaletteMode>('light');
+  const [mode, setMode] = useState<PaletteMode>('dark');
 
   const theme = useMemo(() => createAppTheme(mode), [mode]);
 

@@ -6,21 +6,27 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(96, 125, 139, 0.35);
+  background: rgba(14, 165, 233, 0.3);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(96, 125, 139, 0.6);
+  background: rgba(14, 165, 233, 0.55);
 }
 
 /* Text selection */
 ::selection {
-  background: rgba(2, 136, 209, 0.28);
+  background: rgba(14, 165, 233, 0.28);
   color: inherit;
 }
 
 /* Smooth focus outline */
 *:focus-visible {
-  outline: 2px solid rgba(2, 136, 209, 0.7);
+  outline: 2px solid rgba(14, 165, 233, 0.7);
   outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Section separator lines — faint cyan glow top border */
+[id]:not(#hero) {
+  border-top: 1px solid rgba(14, 165, 233, 0.07);
 }

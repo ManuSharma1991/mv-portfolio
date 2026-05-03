@@ -107,14 +107,39 @@ const HomelabArchitectureSection: React.FC = () => {
     );
 
     return (
-        <Box id="homelab-architecture" sx={{ py: { xs: 6, md: 8 }, backgroundColor: 'background.default' }}>
+        <Box
+            id="homelab-architecture"
+            sx={{
+                py: { xs: 6, md: 8 },
+                background: (theme) =>
+                    theme.palette.mode === 'dark'
+                        ? `linear-gradient(180deg,
+                            rgba(14,165,233,0.06) 0px,
+                            ${theme.palette.alternateBackground.main}ee 80px,
+                            ${theme.palette.alternateBackground.main}ee 100%)`
+                        : theme.palette.background.default,
+            }}
+        >
             <Container maxWidth="lg">
                 <Typography
                     variant="h2"
                     component="h2"
                     gutterBottom
                     textAlign="center"
-                    sx={{ mb: 2, fontWeight: 'bold' }}
+                    sx={{
+                        mb: 2,
+                        fontWeight: 'bold',
+                        '&::after': {
+                            content: '""',
+                            display: 'block',
+                            width: 56,
+                            height: 3,
+                            borderRadius: 2,
+                            backgroundColor: 'secondary.main',
+                            mx: 'auto',
+                            mt: 1.5,
+                        },
+                    }}
                 >
                     Interactive Homelab Architecture
                 </Typography>

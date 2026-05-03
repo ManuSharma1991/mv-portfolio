@@ -108,7 +108,13 @@ const ExpertiseSection: React.FC = () => {
             id="expertise"
             sx={{
                 py: { xs: 6, md: 8 },
-                backgroundColor: 'background.default', // Or 'background.paper' if you prefer white
+                background: (theme) =>
+                    theme.palette.mode === 'dark'
+                        ? `linear-gradient(180deg,
+                            rgba(14,165,233,0.05) 0px,
+                            ${theme.palette.background.default}f0 80px,
+                            ${theme.palette.background.default}f0 100%)`
+                        : theme.palette.background.default,
             }}
         >
             <Container maxWidth="md"> {/* Using "md" for better readability in a single column */}

@@ -196,7 +196,7 @@ const HeroSection: React.FC = () => {
                                 fontSize: { xs: '1rem', sm: '1.07rem' },
                             }}
                         >
-                            Real monitoring. Air-gapped backups. A runbook for every failure mode.
+                            Real-time monitoring. Air-gapped backups. A runbook for every failure mode.
                             That reliability mindset is what I bring to every platform I design.
                         </Typography>
                     </motion.div>

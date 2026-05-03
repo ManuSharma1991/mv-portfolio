@@ -11,19 +11,22 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import ProxmoxIcon from '../assets/proxmox.svg?react';
+import ProxmoxBackupServerIcon from '../assets/proxmox-backup-server.svg?react';
 import NginxPMIcon from '../assets/nginx-proxy-manager.svg?react';
 import AuthentikIcon from '../assets/authentik.svg?react';
 import DockerIcon from '../assets/docker.svg?react';
 import ScrutinyIcon from '../assets/scrutiny.svg?react';
 import UptimeKumaIcon from '../assets/uptime-kuma.svg?react';
 import GiteaIcon from '../assets/gitea.svg?react';
-import ReactLogoIcon from '../assets/react.svg?react';
 import OpenWrtIcon from '../assets/openwrt.svg?react';
 import DozzleIcon from '../assets/dozzle.svg?react';
 import BeszelIcon from '../assets/beszel.svg?react';
 import AdGuardHomeIcon from '../assets/adguard-home.svg?react';
 import WikiJsIcon from '../assets/wikijs.svg?react';
 import PaperlessNgxIcon from '../assets/paperless-ngx.svg?react';
+import PortainerIcon from '../assets/portainer-dark.svg?react';
+import SemaphoreIcon from '../assets/semaphore-dark.svg?react';
+import GuacamoleIcon from '../assets/guacamole.svg?react';
 
 type ProjectStatus = 'Live' | 'Rolling Out' | 'In Development';
 type MonitorRuntimeStatus = 'up' | 'down' | 'maintenance' | 'unknown';
@@ -64,7 +67,7 @@ const projects: Project[] = [
         tags: ['SRE', 'Infra', 'Self-Hosting'],
         monitorBadges: [
             { id: 1, label: 'Proxmox Server', icon: ProxmoxIcon },
-            { id: 46, label: 'Proxmox Backup Server', icon: ProxmoxIcon },
+            { id: 46, label: 'Proxmox Backup Server', icon: ProxmoxBackupServerIcon },
             { id: 48, label: 'Docker', icon: DockerIcon },
         ],
     },
@@ -101,8 +104,8 @@ const projects: Project[] = [
         ],
         tags: ['SRE', 'Infra', 'Self-Hosting'],
         monitorBadges: [
-            { id: 46, label: 'Proxmox Backup Server', name: 'Backup Node', icon: ProxmoxIcon },
-            { id: 1, label: 'Proxmox Server', name: 'Storage Host', icon: ScrutinyIcon },
+            { id: 46, label: 'Proxmox Backup Server', name: 'Backup Node', icon: ProxmoxBackupServerIcon },
+            { id: 1, label: 'Proxmox Server', name: 'Storage Host', icon: ProxmoxIcon },
         ],
     },
     {
@@ -144,18 +147,25 @@ const projects: Project[] = [
         ],
     },
     {
-        icon: ReactLogoIcon,
-        title: 'Public Portfolio Edge Deployment',
+        icon: PortainerIcon,
+        title: 'Orchestration & Automation Layer',
         description:
-            'This portfolio is containerized and routed through the self-hosted edge. Final public rollout target is www.manuviswanadha.in, currently in deployment preparation.',
-        technologies: ['React 19', 'TypeScript', 'Material UI v7', 'Vite', 'Docker', 'Nginx'],
-        status: 'Rolling Out',
+            'A unified control plane for container lifecycle management, infrastructure automation, scheduled task execution, and remote access — operated like a production ops environment.',
+        technologies: ['Portainer', 'Semaphore UI', 'Cronicle', 'OpenWeb UI', 'Guacamole'],
+        status: 'Live',
         highlights: [
-            'Multi-stage container build and immutable static delivery',
-            'Integrated with the same gateway and observability standards as core services',
-            'DNS and public-route cutover pending for www.manuviswanadha.in',
+            'Container fleet management and deployment control via Portainer',
+            'Ansible playbook execution and scheduling via Semaphore UI',
+            'Distributed job scheduling and cron orchestration via Cronicle',
+            'Browser-based remote access gateway (RDP/SSH) via Guacamole',
+            'Local LLM inference and prompt tooling via OpenWeb UI',
         ],
-        tags: ['Frontend', 'MERN', 'Platform'],
+        tags: ['SRE', 'DevOps', 'Platform', 'Infra'],
+        monitorBadges: [
+            { id: 25, label: 'Portainer', icon: PortainerIcon },
+            { id: 39, label: 'Semaphore UI', icon: SemaphoreIcon },
+            { id: 64, label: 'Guacamole', icon: GuacamoleIcon },
+        ],
     },
 ];
 
@@ -264,7 +274,13 @@ const ShowcaseSection: React.FC = () => {
             id="showcase"
             sx={{
                 py: { xs: 6, md: 8 },
-                backgroundColor: 'alternateBackground.main',
+                background: (theme) =>
+                    theme.palette.mode === 'dark'
+                        ? `linear-gradient(180deg,
+                            rgba(14,165,233,0.06) 0px,
+                            ${theme.palette.alternateBackground.main}ee 80px,
+                            ${theme.palette.alternateBackground.main}ee 100%)`
+                        : theme.palette.alternateBackground.main,
             }}
         >
             <Container maxWidth="lg">

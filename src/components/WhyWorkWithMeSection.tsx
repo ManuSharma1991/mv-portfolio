@@ -51,7 +51,13 @@ const WhyWorkWithMeSection: React.FC = () => {
             id="why-work-with-me"
             sx={{
                 py: { xs: 6, md: 8 },
-                backgroundColor: 'alternateBackground.main',
+                background: (theme) =>
+                    theme.palette.mode === 'dark'
+                        ? `linear-gradient(180deg,
+                            rgba(14,165,233,0.06) 0px,
+                            ${theme.palette.alternateBackground.main}ee 80px,
+                            ${theme.palette.alternateBackground.main}ee 100%)`
+                        : theme.palette.alternateBackground.main,
             }}
         >
             <Container maxWidth="lg">

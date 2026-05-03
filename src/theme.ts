@@ -1,6 +1,6 @@
 // src/theme.ts
-import { createTheme, responsiveFontSizes, type PaletteMode } from '@mui/material/styles';
-import { red, blueGrey, lightBlue } from '@mui/material/colors';
+import { createTheme, responsiveFontSizes, type PaletteMode, type Theme } from '@mui/material/styles';
+import { red, blueGrey } from '@mui/material/colors';
 
 // Augment MUI palette to include alternateBackground
 declare module '@mui/material/styles' {
@@ -28,26 +28,28 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
                 contrastText: '#ffffff',
             },
             secondary: {
-                main: lightBlue[600],
-                light: lightBlue[400],
-                dark: lightBlue[800],
+                // Sky-500 family — more vivid than lightBlue[600]
+                main: isDark ? '#0ea5e9' : '#0284c7',
+                light: '#38bdf8',
+                dark: '#0369a1',
                 contrastText: '#ffffff',
             },
             error: {
                 main: red.A400,
             },
             alternateBackground: {
-                main: isDark ? '#141e28' : '#eef2f5',
+                main: isDark ? '#040c18' : '#e8edf4',
             },
             background: {
-                default: isDark ? '#0f1720' : '#f4f7f9',
-                paper: isDark ? '#18212b' : '#ffffff',
-                alternate: isDark ? '#141e28' : '#eef2f5',
+                // Deep navy-slate palette — distinct layers
+                default: isDark ? '#080f1c' : '#f0f4f8',
+                paper: isDark ? '#0e1d2f' : '#ffffff',
+                alternate: isDark ? '#040c18' : '#e8edf4',
             },
             text: {
-                primary: isDark ? '#e6edf3' : blueGrey[900],
-                secondary: isDark ? '#b7c4cf' : blueGrey[700],
-                disabled: isDark ? '#708090' : blueGrey[500],
+                primary: isDark ? '#f1f5f9' : blueGrey[900],
+                secondary: isDark ? '#94a3b8' : blueGrey[700],
+                disabled: isDark ? '#475569' : blueGrey[500],
             },
         },
         typography: {
@@ -93,22 +95,57 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
                 defaultProps: {
                     disableElevation: true,
                 },
+                styleOverrides: {
+                    root: {
+                        borderRadius: '8px',
+                    },
+                },
             },
             MuiPaper: {
                 defaultProps: {
                     elevation: 2,
                 },
                 styleOverrides: {
-                    root: {
+                    root: ({ theme }: { theme: Theme }) => ({
                         backgroundImage: 'none',
-                    },
+                        ...(theme.palette.mode === 'dark' && {
+                            border: '1px solid rgba(255,255,255,0.07)',
+                            boxShadow: '0 2px 12px rgba(0,0,0,0.5)',
+                        }),
+                    }),
                 },
             },
             MuiChip: {
                 styleOverrides: {
-                    root: {
+                    root: ({ theme }: { theme: Theme }) => ({
                         fontWeight: 500,
-                    },
+                        ...(theme.palette.mode === 'dark' && {
+                            borderColor: 'rgba(255,255,255,0.15)',
+                        }),
+                    }),
+                },
+            },
+            MuiTextField: {
+                styleOverrides: {
+                    root: ({ theme }: { theme: Theme }) => ({
+                        ...(theme.palette.mode === 'dark' && {
+                            '& .MuiOutlinedInput-notchedOutline': {
+                                borderColor: 'rgba(255,255,255,0.15)',
+                            },
+                        }),
+                    }),
+                },
+            },
+            MuiAppBar: {
+                styleOverrides: {
+                    root: ({ theme }: { theme: Theme }) => ({
+                        ...(theme.palette.mode === 'dark' && {
+                            backgroundColor: 'rgba(8,15,28,0.88)',
+                            backdropFilter: 'blur(12px)',
+                            borderBottom: '1px solid rgba(255,255,255,0.07)',
+                            boxShadow: 'none',
+                        }),
+                    }),
                 },
             },
             MuiContainer: {

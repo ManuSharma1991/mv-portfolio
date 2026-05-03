@@ -18,7 +18,13 @@ const AboutMeSection: React.FC = () => {
             id="about-me"
             sx={{
                 py: { xs: 6, md: 8 },
-                backgroundColor: 'background.paper',
+                background: (theme) =>
+                    theme.palette.mode === 'dark'
+                        ? `linear-gradient(180deg,
+                            rgba(14,165,233,0.045) 0px,
+                            ${theme.palette.background.paper}f2 80px,
+                            ${theme.palette.background.paper}f2 100%)`
+                        : theme.palette.background.paper,
             }}
         >
             <Container maxWidth="lg">

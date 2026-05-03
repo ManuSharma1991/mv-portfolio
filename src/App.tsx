@@ -31,6 +31,8 @@ const globalStyles = {
 };
 
 function App({ colorMode, onToggleColorMode }: AppProps) {
+  const isDark = colorMode === 'dark';
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Box sx={globalStyles} />
@@ -39,7 +41,33 @@ function App({ colorMode, onToggleColorMode }: AppProps) {
       <ScrollProgressBar />
       <SectionMinimap />
 
-      <Box component="main" sx={{ flexGrow: 1 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          // Global dot-grid canvas visible behind every section
+          ...(isDark && {
+            position: 'relative',
+            backgroundImage:
+              'radial-gradient(rgba(14,165,233,0.055) 1px, transparent 1px)',
+            backgroundSize: '28px 28px',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none',
+              // Subtle vignette for depth: lighter center, darker edges
+              background:
+                'radial-gradient(120% 120% at 50% 42%, rgba(8,15,28,0) 38%, rgba(8,15,28,0.34) 100%)',
+              zIndex: 0,
+            },
+            '& > *': {
+              position: 'relative',
+              zIndex: 1,
+            },
+          }),
+        }}
+      >
         <AnimatedSection>
           <HeroSection />
         </AnimatedSection>

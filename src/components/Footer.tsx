@@ -41,24 +41,24 @@ const Footer: React.FC = () => {
                     Many icons are sourced from{' '}
                     <Box
                         component="a"
-                        href="https://simpleicons.org"
+                        href="https://dashboardicons.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         sx={{ color: 'grey.500', '&:hover': { color: 'grey.300' } }}
                     >
-                        Simple Icons
+                        Dashboard Icons
                     </Box>
-                    {' '}and made available under the{' '}
+                    {' '}and are used under the project's{' '}
                     <Box
                         component="a"
-                        href="https://creativecommons.org/publicdomain/zero/1.0/"
+                        href="https://github.com/homarr-labs/dashboard-icons/blob/main/LICENSE"
                         target="_blank"
                         rel="noopener noreferrer"
                         sx={{ color: 'grey.500', '&:hover': { color: 'grey.300' } }}
                     >
-                        CC0 1.0 Universal
+                        license terms
                     </Box>
-                    {' '}license. Use of these logos does not imply endorsement.
+                    . Use of these logos does not imply endorsement.
                 </Typography>
 
                 {/* Optional: Social Media Links */}

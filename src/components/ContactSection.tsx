@@ -84,10 +84,16 @@ const ContactSection: React.FC = () => {
 
     return (
         <Box
-            id="contact" // ID for navigation
+            id="contact"
             sx={{
                 py: { xs: 6, md: 8 },
-                backgroundColor: 'background.paper', // Or a distinct background color
+                background: (theme) =>
+                    theme.palette.mode === 'dark'
+                        ? `linear-gradient(180deg,
+                            rgba(14,165,233,0.045) 0px,
+                            ${theme.palette.background.paper}f2 80px,
+                            ${theme.palette.background.paper}f2 100%)`
+                        : theme.palette.background.paper,
             }}
         >
             <Container maxWidth="md"> {/* "md" is good for contact info/forms */}
@@ -96,7 +102,20 @@ const ContactSection: React.FC = () => {
                     component="h2"
                     gutterBottom
                     textAlign="center"
-                    sx={{ mb: { xs: 4, md: 6 }, fontWeight: 'bold' }}
+                    sx={{
+                        mb: { xs: 3, md: 5 },
+                        fontWeight: 'bold',
+                        '&::after': {
+                            content: '""',
+                            display: 'block',
+                            width: 56,
+                            height: 3,
+                            borderRadius: 2,
+                            backgroundColor: 'secondary.main',
+                            mx: 'auto',
+                            mt: 1.5,
+                        },
+                    }}
                 >
                     Get In Touch
                 </Typography>
