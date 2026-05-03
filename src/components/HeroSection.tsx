@@ -13,7 +13,7 @@ const roles = [
 
 const stats = [
     { value: '40+', label: 'Services' },
-    { value: '5', label: 'Infra Nodes' },
+    { value: '4', label: 'Infra Nodes' },
     { value: '24/7', label: 'Monitored' },
     { value: '100%', label: 'Self-Hosted' },
 ];

@@ -32,10 +32,10 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+    { label: 'Showcase', id: 'showcase' },
     { label: 'Expertise', id: 'expertise' },
     { label: 'Why Me?', id: 'why-work-with-me' },
     { label: 'About', id: 'about-me' },
-    { label: 'Showcase', id: 'showcase' },
     { label: 'Homelab', id: 'homelab-architecture' },
     { label: 'Contact', id: 'contact' },
 ];
@@ -43,10 +43,9 @@ const navItems: NavItem[] = [
 const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-        element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-        });
+        const navHeight = document.getElementById('site-navbar')?.getBoundingClientRect().height ?? 76;
+        const targetTop = element.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
     }
 };
 
@@ -89,7 +88,7 @@ const Navigation: React.FC<NavigationProps> = ({ colorMode, onToggleColorMode })
 
     return (
         <>
-            <AppBar component="nav" position="sticky" sx={{ backgroundColor: 'primary.dark' }}>
+            <AppBar id="site-navbar" component="nav" position="sticky" sx={{ backgroundColor: 'primary.dark' }}>
                 <Container maxWidth="lg">
                     <Toolbar disableGutters>
                         {/* Logo / Name Section */}
@@ -165,7 +164,6 @@ const Navigation: React.FC<NavigationProps> = ({ colorMode, onToggleColorMode })
                             {navItems.map((item) => (
                                 <Button
                                     key={item.id}
-                                    href={`#${item.id}`}
                                     onClick={() => handleScrollTo(item.id)}
                                     sx={{ color: 'common.white', mx: 1 }}
                                 >

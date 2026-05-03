@@ -30,6 +30,9 @@ const ExpertiseCard: React.FC<ExpertiseAreaProps> = ({ icon: AreaIcon, title, de
             elevation={3}
             sx={{
                 p: { xs: 2, sm: 3 },
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
                 transition: 'transform 0.22s ease, box-shadow 0.22s ease',
                 '&:hover': {
                     transform: 'translateY(-3px)',

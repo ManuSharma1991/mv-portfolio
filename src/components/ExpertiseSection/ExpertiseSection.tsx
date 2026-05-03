@@ -1,6 +1,6 @@
 // src/components/ExpertiseSection/ExpertiseSection.tsx
 import React from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import CodeIcon from '@mui/icons-material/Code';
 import BuildIcon from '@mui/icons-material/Build';
@@ -117,7 +117,7 @@ const ExpertiseSection: React.FC = () => {
                         : theme.palette.background.default,
             }}
         >
-            <Container maxWidth="md"> {/* Using "md" for better readability in a single column */}
+            <Container maxWidth="xl">
                 <Typography
                     variant="h2"
                     component="h2"
@@ -141,23 +141,26 @@ const ExpertiseSection: React.FC = () => {
                     My Expertise
                 </Typography>
 
-                {expertiseData.map((area, index) => (
-                    <motion.div
-                        key={area.title}
-                        initial={{ opacity: 0, y: 28 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.15 }}
-                        transition={{ duration: 0.55, ease: 'easeOut', delay: index * 0.1 }}
-                        style={{ marginBottom: index < expertiseData.length - 1 ? 32 : 0 }}
-                    >
-                        <ExpertiseCard
-                            icon={area.icon}
-                            title={area.title}
-                            description={area.description}
-                            points={area.points}
-                        />
-                    </motion.div>
-                ))}
+                <Grid container spacing={4} alignItems="stretch">
+                    {expertiseData.map((area, index) => (
+                        <Grid key={area.title} size={{ xs: 12, sm: 6, lg: 4 }}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 28 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.1 }}
+                                transition={{ duration: 0.55, ease: 'easeOut', delay: index * 0.1 }}
+                                style={{ height: '100%' }}
+                            >
+                                <ExpertiseCard
+                                    icon={area.icon}
+                                    title={area.title}
+                                    description={area.description}
+                                    points={area.points}
+                                />
+                            </motion.div>
+                        </Grid>
+                    ))}
+                </Grid>
             </Container>
         </Box>
     );

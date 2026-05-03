@@ -23,6 +23,7 @@ interface HomelabNode {
     tier: Tier;
     role: string;
     highlights: string[];
+    standards: string[];
 }
 
 const tierMeta: Record<Tier, { label: string; icon: React.ElementType }> = {
@@ -44,6 +45,11 @@ const nodes: HomelabNode[] = [
             'GPU render node shared to Jellyfin + Immich containers',
             'LXC startup orchestration and role-based segmentation',
         ],
+        standards: [
+            'Recovery: Full restore from Proxmox Backup Server (PBS)',
+            'Isolation: Role-based LXC segmentation per workload',
+            'Lifecycle: Controlled startup order with dependency enforcement',
+        ],
     },
     {
         id: 'bifrost',
@@ -54,6 +60,11 @@ const nodes: HomelabNode[] = [
             'VLANs: Gatekeepers, Media, DevOps, Downloads, Sandbox',
             'Trunked through vmbr0',
             'Traffic policy isolation by workload type',
+        ],
+        standards: [
+            'Segmentation: Each workload class on a dedicated VLAN',
+            'Policy: East-west traffic blocked by default between VLANs',
+            'Resilience: VM can be migrated or restored without physical changes',
         ],
     },
     {
@@ -66,6 +77,11 @@ const nodes: HomelabNode[] = [
             'Union mount /mnt/eternity consumed by services',
             'Parity and backup workflows for media + docs',
         ],
+        standards: [
+            'Integrity: Scheduled ZFS scrubs to detect silent corruption',
+            'Parity: SnapRAID runs nightly to protect non-ZFS drives',
+            'Recovery: Import procedures documented for every pool',
+        ],
     },
     {
         id: 'ultron',
@@ -77,6 +93,11 @@ const nodes: HomelabNode[] = [
             'Portainer + Dozzle + Beszel observability',
             'Public entrypoint for all critical services',
         ],
+        standards: [
+            'Access: All public-facing services gated behind SSO',
+            'TLS: Centralized certificate lifecycle via Nginx Proxy Manager',
+            'Monitoring: Real-time log and container health via Dozzle + Beszel',
+        ],
     },
     {
         id: 'agamotto',
@@ -87,6 +108,11 @@ const nodes: HomelabNode[] = [
             'Proxmox Backup Server 4.1.6',
             '1TB NVMe datastore (Vault)',
             'Independent backup target from main host',
+        ],
+        standards: [
+            'Independence: Physically separate host, isolated from primary failure domain',
+            'Verification: Backup integrity verified post-run by PBS',
+            'Recovery: Documented restore runbook for all critical containers',
         ],
     },
 ];
@@ -226,9 +252,9 @@ const HomelabArchitectureSection: React.FC = () => {
                                 <Typography variant="caption" sx={{ fontWeight: 700, color: 'text.secondary', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                                     Platform Standards
                                 </Typography>
-                                <Typography variant="caption" color="text.secondary">• Recovery: Full restore from Proxmox Backup Server (PBS)</Typography>
-                                <Typography variant="caption" color="text.secondary">• Isolation: Role-based LXC segmentation per workload</Typography>
-                                <Typography variant="caption" color="text.secondary">• Monitoring: Centralised health, logs, and alerting</Typography>
+                                {selectedNode.standards.map((s) => (
+                                    <Typography key={s} variant="caption" color="text.secondary">• {s}</Typography>
+                                ))}
                             </Box>
 
                             <Button variant="outlined" sx={{ mt: 3 }} onClick={scrollToContact}>

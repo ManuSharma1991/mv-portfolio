@@ -27,6 +27,7 @@ import PaperlessNgxIcon from '../assets/paperless-ngx.svg?react';
 import PortainerIcon from '../assets/portainer-dark.svg?react';
 import SemaphoreIcon from '../assets/semaphore-dark.svg?react';
 import GuacamoleIcon from '../assets/guacamole.svg?react';
+import CronicleIcon from '../assets/cronicle.svg?react';
 
 type ProjectStatus = 'Live' | 'Rolling Out' | 'In Development';
 type MonitorRuntimeStatus = 'up' | 'down' | 'maintenance' | 'unknown';
@@ -57,7 +58,7 @@ const projects: Project[] = [
         title: 'Virtualization & Compute Platform',
         description:
             'A production-style private platform built on Proxmox VE with role-segmented workloads, reliability-focused lifecycle controls, and deterministic service orchestration.',
-        technologies: ['Proxmox VE', 'LXC', 'Docker', 'OpenWrt', 'Ansible'],
+        technologies: ['Proxmox VE', 'LXC', 'Docker', 'OpenWrt', 'Portainer'],
         status: 'Live',
         highlights: [
             'Role-driven container topology with controlled startup dependencies',
@@ -151,18 +152,17 @@ const projects: Project[] = [
         title: 'Orchestration & Automation Layer',
         description:
             'A unified control plane for container lifecycle management, infrastructure automation, scheduled task execution, and remote access — operated like a production ops environment.',
-        technologies: ['Portainer', 'Semaphore UI', 'Cronicle', 'OpenWeb UI', 'Guacamole'],
+        technologies: ['Semaphore UI', 'Cronicle', 'Ansible', 'Guacamole'],
         status: 'Live',
         highlights: [
             'Container fleet management and deployment control via Portainer',
             'Ansible playbook execution and scheduling via Semaphore UI',
             'Distributed job scheduling and cron orchestration via Cronicle',
             'Browser-based remote access gateway (RDP/SSH) via Guacamole',
-            'Local LLM inference and prompt tooling via OpenWeb UI',
         ],
         tags: ['SRE', 'DevOps', 'Platform', 'Infra'],
         monitorBadges: [
-            { id: 25, label: 'Portainer', icon: PortainerIcon },
+            { id: 42, label: 'Cronicle', icon: CronicleIcon },
             { id: 39, label: 'Semaphore UI', icon: SemaphoreIcon },
             { id: 64, label: 'Guacamole', icon: GuacamoleIcon },
         ],
