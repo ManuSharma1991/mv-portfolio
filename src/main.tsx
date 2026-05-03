@@ -17,6 +17,8 @@ import '@fontsource/roboto/700.css'; // Bold
 // If you need italic versions, import them as well:
 // import '@fontsource/roboto/400-italic.css';
 
+import './styles/global.css';
+
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Failed to find the root element');
 

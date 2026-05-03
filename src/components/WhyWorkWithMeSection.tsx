@@ -1,5 +1,16 @@
 import React from 'react';
 import { Box, Container, Grid, Paper, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
+
+const gridContainerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+
+const cardVariants = {
+    hidden: { opacity: 0, y: 28 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' as const } },
+};
 import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
 import MonitorHeartOutlinedIcon from '@mui/icons-material/MonitorHeartOutlined';
 import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
@@ -49,7 +60,20 @@ const WhyWorkWithMeSection: React.FC = () => {
                     component="h2"
                     gutterBottom
                     textAlign="center"
-                    sx={{ mb: 2, fontWeight: 'bold' }}
+                    sx={{
+                        mb: 1,
+                        fontWeight: 'bold',
+                        '&::after': {
+                            content: '""',
+                            display: 'block',
+                            width: 56,
+                            height: 3,
+                            borderRadius: 2,
+                            backgroundColor: 'secondary.main',
+                            mx: 'auto',
+                            mt: 1.5,
+                        },
+                    }}
                 >
                     How I Build Reliable Systems
                 </Typography>
@@ -63,11 +87,19 @@ const WhyWorkWithMeSection: React.FC = () => {
                     Principles I apply to every platform I design — whether it’s a homelab service or a production deployment.
                 </Typography>
 
-                <Grid container spacing={3}>
+                <Grid
+                    container
+                    spacing={3}
+                    component={motion.div}
+                    variants={gridContainerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
                     {principles.map((p) => {
                         const Icon = p.icon;
                         return (
-                            <Grid key={p.title} size={{ xs: 12, sm: 6 }}>
+                            <Grid key={p.title} size={{ xs: 12, sm: 6 }} component={motion.div} variants={cardVariants}>
                                 <Paper
                                     elevation={2}
                                     sx={{
@@ -78,6 +110,11 @@ const WhyWorkWithMeSection: React.FC = () => {
                                         gap: 1.5,
                                         borderLeft: '3px solid',
                                         borderColor: 'secondary.main',
+                                        transition: 'transform 0.22s ease, box-shadow 0.22s ease',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            boxShadow: (theme) => theme.shadows[6],
+                                        },
                                     }}
                                 >
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>

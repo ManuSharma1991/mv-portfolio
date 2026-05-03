@@ -1,91 +1,114 @@
-# `mv-portfolio`: My React-Powered Landing Page & Portfolio
+# `mv-portfolio`: Platform Engineering & Self-Hosting Portfolio
 
-This repository contains the source code for my personal website, [manuviswanadha.in](https://manuviswanadha.in), showcasing my skills in MERN stack development, DevOps, and self-hosting.
+This repository contains the source code for my personal website, showcasing my work in self-hosted infrastructure, platform reliability, and full-stack development.
 
-Built with **React, TypeScript, and Material-UI (MUI)**, and deployed via Docker on my homelab, this project is a transparent look into how I build modern web applications. This README mirrors the live site's content, offering a deep dive into my expertise and approach.
+Built with **React 19, TypeScript, Material-UI v7, and Vite**. Deployed via Docker on my self-hosted edge. This project is a transparent look at how I design reliable systems and the platforms I run.
 
-Curious about the tech or my work? You're in the right place.
-
----
-
-## 👋 Manu Viswanadha: MERN Stack Development & Self-Hosted Solutions – Tailored to Your Needs
-
-Building intuitive web experiences with the MERN stack and offering robust self-hosting expertise. My approach involves rapidly grasping your project needs to propose versatile and efficient solutions tailored for you.
-
-➡️ **[Let's Find Your Solution](#contact)** (Internal link to contact section)
+The site features live uptime monitoring from my homelab, an interactive architecture diagram, and a real-world showcase of production-grade self-hosted services.
 
 ---
 
-## 🛠️ My Expertise
+## 👋 I build self-hosted infrastructure that runs like production — on hardware you own.
 
-### MERN Stack Development
+My homelab runs 40+ services across Proxmox, Docker, and bare metal — with real monitoring, air-gapped backups, and a runbook for every failure mode. That same reliability mindset is what I bring to every platform I design.
 
-My MERN stack development experience covers the full spectrum of application creation, from intricate frontend UIs to robust backend logic and data management:
+**Roles:** Platform & Infrastructure Engineer · Self-Hosting Specialist · SRE Practitioner · Full-Stack Developer
 
-* **Dynamic & Interactive Frontend Development (React & Redux Toolkit):**
-  * Expertise in building complex, state-driven user interfaces with React and Redux Toolkit.
-  * Proven ability to develop features like custom, interactive timelines, real-time previews, and sophisticated data visualizations.
-  * Proficient in integrating libraries like D3.js to render dynamic overlays (e.g., Picture-in-Picture, text, images) on media elements.
-  * Experience building features from scratch, such as comprehensive media libraries for browsing and selecting assets.
-  * Developed functionalities for direct media capture within the browser, including video, audio, and screen recording.
-* **Robust Backend Development (Node.js & Express.js):**
-  * Skilled in creating secure and efficient RESTful APIs with Node.js and Express.js.
-  * Designing clear API contracts and data structures (e.g., custom JSON formats for complex operations) that enable decoupled and extensible systems.
-* **Efficient Data Management (MongoDB):**
-  * Designing MongoDB schemas optimized for application performance and scalability.
-* **Architectural Foresight:**
-  * A key focus in my development process is creating extensible architectures. For example, the design of core data structures (like custom JSON for editorial actions) allows for advanced capabilities such as programmatically generating entire complex sequences or workflows without manual UI interaction, opening doors for automation and templating.
+---
 
-### Problem Solving & Architectural Design
+## 🏗️ How I Build Reliable Systems
 
-My expertise includes dissecting intricate UI/UX challenges and engineering elegant, functional solutions. For example:
+Principles I apply to every platform I design:
 
-* **Pixel-to-Time Translation for Dynamic Timelines:** Successfully developed custom mathematical logic and timer-based mechanisms within React & Redux Toolkit to precisely map pixel movements to temporal units, ensuring real-time responsiveness for dynamic timeline interfaces.
-* **Decoupled Preview & Backend Processing:** Architected systems where complex editorial actions were previewed instantly on the frontend using CSS, while a custom JSON instruction set captured edits for sequential backend processing, ensuring a fluid user experience and a maintainable, extensible system.
+### **Designed for Failure, Not Just Success**
+Every system I build assumes failure will happen — disk issues, network drops, service crashes. That's why I design with isolation, recovery paths, and backup-first architecture from day one.
 
-### Deployment, CI/CD & Infrastructure Management
+### **Operational by Default**
+I don't stop at deployment. Every platform includes monitoring, alerting, logging, and runbooks — so it can be operated, not just launched.
 
-Beyond development, I bring practical experience in deploying and managing web applications:
+### **Controlled Complexity**
+Instead of stacking tools blindly, I design systems with clear boundaries — ingress, compute, storage, and observability — keeping things understandable and maintainable as they grow.
 
-* **Containerization with Docker:** Proficient in writing Dockerfiles (including multi-stage builds for React & Node.js) and managing containerized services with tools like Portainer and Docker CLI.
-* **Linux Server Administration & Self-Hosting:** Over a decade of experience as a Linux user, adept at server administration for robust self-hosted environments. I manage a personal homelab hosting diverse services, orchestrated via Nginx Proxy Manager.
-  * *This very landing page is containerized with Docker and self-hosted on this infrastructure.*
-* **CI/CD Automation:** Practical experience with GitHub Actions and Jenkins for automating build, test, and deployment pipelines for personal projects.
+### **Real Systems, Not Demos**
+My work runs continuously — serving media, managing data, handling authentication — with real uptime and recovery expectations, not just a proof-of-concept.
+
+---
+
+## 👨‍💻 About My Work
+
+I build and operate self-hosted platforms that behave like production systems — with a focus on reliability, recovery, and long-term maintainability.
+
+My work sits at the intersection of platform engineering and application development. I run a multi-service environment built on Proxmox, Docker, and secure ingress, with real monitoring, backup workflows, and failure-tested runbooks.
+
+### Platform & Infrastructure
+
+* **Proxmox VE:** Hypervisor for 10+ role-segmented LXC containers with controlled startup orchestration
+* **Networking & Ingress:** OpenWrt for inter-VLAN routing; Nginx Proxy Manager for centralized TLS termination; Authentik for SSO
+* **Storage:** ZFS + mergerfs + SnapRAID unified pool consumed by services; independent PBS backup target
+* **Observability:** Uptime Kuma, Dozzle, Beszel for health, logs, and metrics; CrowdSec for perimeter defence
+* **Backup & Recovery:** Proxmox Backup Server on dedicated node; documented runbooks for failures
+
+### Full-Stack Application Development
+
+* **Frontend:** React 19, TypeScript, Material-UI, Vite, framer-motion
+* **Backend:** Node.js, Express, REST APIs
+* **Data:** MongoDB schema design for performance and scalability
+
+---
+
+## 🏢 Personal Infrastructure
+
+I operate a production-grade homelab running Proxmox 9, Docker, ZFS, Nginx, Authentik, and PBS. Key components:
+
+* **Tesseract (Proxmox VE):** Ryzen 5 5600X, 32GB RAM, AMD RX 6600 XT GPU render node
+* **Bifrost (OpenWrt):** VLAN routing with workload-based traffic policies
+* **Ultron (Gateway/Auth):** Nginx Proxy Manager, Authentik SSO, CrowdSec, observability
+* **Vault (Storage):** ZFS + mergerfs + SnapRAID pools
+* **Agamotto (PBS):** Dedicated backup target on Raspberry Pi 5
+
+---
+
+## 📦 Live Project Showcase
+
+The portfolio includes **live uptime monitoring** of services running on this infrastructure:
+
+* **Virtualization & Compute:** Proxmox with role-segmented LXC workloads
+* **Secure Gateway & Identity:** Nginx Proxy Manager + Authentik SSO + OpenWrt
+* **Storage & Data Protection:** ZFS/mergerfs unified mount, SnapRAID, PBS backup
+* **Observability & Operations:** Uptime Kuma, Dozzle, Beszel
+* **Private Collaboration:** Wiki.js, Gitea, Paperless-ngx, Vaultwarden
+* **Portfolio Edge:** This site (React 19 + TypeScript + Docker + Nginx)
+
+Each service displays **live status dots** showing real uptime (green/red/blue for up/down/maintenance).
+
+---
+
+## ✨ Portfolio Site: Technology & Architecture
+
+**Tech Stack:**
+* React 19 + TypeScript + Material-UI v7
+* Vite, framer-motion animations
+* Uptime Kuma API integration for live status
+* EmailJS contact form
+* Multi-stage Docker → Nginx serving
+
+**Features:**
+* Responsive hero with role badges (stagger animation)
+* Live project showcase with animated status dots
+* Interactive homelab architecture diagram
+* Dark/light mode toggle
+* Scroll-triggered section animations
+* Real-time status polling from infrastructure
 
 ---
 
 ## 🤔 Why Work With Me?
 
-Choosing the right developer is key to your project's success. Here’s what I bring to the table:
-
-* **Rapid Problem Understanding & Versatile Solutions:** I excel at quickly grasping project requirements and presenting 2-3 clear, well-reasoned alternative solutions.
-* **Proven Problem-Solving & Architectural Skills:** My experience involves tackling complex technical challenges and architecting robust, maintainable solutions.
-* **Full-Spectrum Technical Capability:** Expertise spanning full-stack MERN development and practical DevOps skills (Docker, Linux, self-hosting).
-* **Commitment to Continuous Learning & Modern Practices:** Dedicated self-learning and practical application (e.g., mastering Docker, building a homelab) ensure I leverage current and effective technologies.
-* **Clear Communication & Collaboration:** I believe in transparent and timely communication throughout the project lifecycle.
-* **Pragmatic & Efficient Delivery:** I focus on delivering functional and impactful solutions efficiently.
-
----
-
-## 👨‍💻 About Me
-
-### My Journey: From IT Roots to a Passion for Self-Hosted Solutions
-
-My journey with technology is one of continuous learning, practical application, and a genuine passion for building things that work. After an initial period in the IT industry my path took a different turn but my fascination with coding and system building never faded.
-
-More recently, I've dived back into my technical passions headfirst, focusing on MERN stack development and the fascinating world of DevOps and self-hosting. This isn't just theoretical for me; I've built and continue to expand my own homelab server environment from the ground up. There's immense satisfaction in this – like setting up a media server that allows a friend overseas to access our favorite TV shows, or providing a personal cloud storage solution for my family. These personal projects are where I rigorously hone my skills with Docker, Linux administration, and network configuration.
-
-This hands-on, problem-solving approach is what I bring to my freelance work. I'm committed to leveraging these modern skills to create valuable, efficient, and reliable web solutions for my clients.
-
----
-
-## ✨ Skill Showcase / My Projects
-
-* **Upcoming Project: Self-Hosted Link-in-Bio Service with Analytics**
-  * **Description:** A MERN-stack application allowing users to create and self-host their own "link-in-bio" pages, complete with basic click analytics.
-  * **Technologies:** React, Node.js, Express, MongoDB, Docker, Material-UI.
-  * **Status:** In Development.
-  * *(Links to Live Demo, GitHub Repo, and Deployment Tutorial will be added here upon completion)*
+* **Reliability-First Thinking:** Design for failure with isolation, recovery, and backup-first architecture
+* **Operational Maturity:** Every system includes monitoring, alerting, logging, and runbooks
+* **Real-World Testing:** My homelab is a live lab for architecture patterns and failure scenarios
+* **Full-Spectrum Capability:** Platform engineering, SRE practices, full-stack development
+* **Transparent Communication:** Clear problem diagnosis, multiple solution paths
 
 ---
 
@@ -94,72 +117,50 @@ This hands-on, problem-solving approach is what I bring to my freelance work. I'
 This section is for developers looking to run this project locally.
 
 1. **Prerequisites:**
-    * Node.js (v18 or later recommended)
+    * Node.js (v18 or later)
     * npm or yarn
-    * Docker (optional, for running the production build locally)
+    * Docker (optional)
 
 2. **Clone the repository:**
-
     ```bash
-    git clone https://github.com/your-username/mv-portfolio.git
+    git clone https://github.com/ManuSharma1991/mv-portfolio.git
     cd mv-portfolio
     ```
 
 3. **Install dependencies:**
-
     ```bash
     npm install
-    # or
-    # yarn install
     ```
 
 4. **Run the development server:**
-
     ```bash
     npm run dev
-    # or
-    # yarn dev
     ```
-
-    The application will typically be available at `http://localhost:5173` (for Vite) or `http://localhost:3000` (for CRA).
+    Available at `http://localhost:5173` (Vite).
 
 5. **Build for production:**
-
     ```bash
     npm run build
-    # or
-    # yarn build
     ```
 
-    This will create a `dist` (or `build`) folder with the static assets.
-
-6. **(Optional) Run production build with Docker:**
-    * Ensure you have Docker installed and running.
-    * Build the Docker image (refer to the `Dockerfile` and `nginx.conf`):
-
-        ```bash
-        docker build -t mv-portfolio-img .
-        ```
-
-    * Run the Docker container. The application inside the container listens on port `12345`. You can map any host port to it. For example, to map host port `8080` to the container's `12345`:
-
-        ```bash
-        docker run -d -p 8080:12345 --name mv-portfolio-app mv-portfolio-img
-        ```
-
-        You can then access the application at `http://localhost:8080` in your browser. If you want to use a different host port (e.g., `80`), change `-p 80:12345`.
+6. **Run production build with Docker:**
+    ```bash
+    docker build -t mv-portfolio-img .
+    docker run -d -p 8080:12345 --name mv-portfolio-app mv-portfolio-img
+    ```
+    Then visit `http://localhost:8080`.
 
 ---
 
-## <a name="contact"></a>✉️ Get In Touch
+## ✉️ Get In Touch
 
-Interested in collaborating or have a project in mind? I'd love to hear from you. The best way to reach me currently is via email or Github.
+Interested in collaborating? I'd love to hear from you.
 
 * **Email:** [manu.viswanad@gmail.com](mailto:manu.viswanad@gmail.com)
-<!-- *   **LinkedIn:** [Your LinkedIn Profile URL](https://www.linkedin.com/in/your-linkedin-profile/) (Replace with your LinkedIn URL) -->
-* **GitHub:** [Your GitHub Profile URL](https://github.com/ManuSharma1991)
+* **GitHub:** [ManuSharma1991](https://github.com/ManuSharma1991)
 
 ---
+
 © 2025 Manu Viswanadha. All rights reserved.
 
-*This website is proudly self-hosted on a Raspberry Pi using Docker.*
+*This website is proudly self-hosted on my homelab infrastructure using Proxmox, Docker, and Nginx.*

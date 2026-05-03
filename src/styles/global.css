@@ -1,0 +1,26 @@
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(96, 125, 139, 0.35);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(96, 125, 139, 0.6);
+}
+
+/* Text selection */
+::selection {
+  background: rgba(2, 136, 209, 0.28);
+  color: inherit;
+}
+
+/* Smooth focus outline */
+*:focus-visible {
+  outline: 2px solid rgba(2, 136, 209, 0.7);
+  outline-offset: 2px;
+}

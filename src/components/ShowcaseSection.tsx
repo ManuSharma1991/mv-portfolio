@@ -9,6 +9,7 @@ import {
     CircularProgress,
     Stack,
 } from '@mui/material';
+import { motion } from 'framer-motion';
 import ProxmoxIcon from '../assets/proxmox.svg?react';
 import NginxPMIcon from '../assets/nginx-proxy-manager.svg?react';
 import AuthentikIcon from '../assets/authentik.svg?react';
@@ -195,6 +196,16 @@ const statusDotLabel = (status: MonitorRuntimeStatus): string => {
 
 const FILTERS = ['All', 'SRE', 'Infra', 'Security', 'Platform', 'DevOps', 'MERN', 'Frontend', 'Self-Hosting'] as const;
 
+const gridContainerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
+
+const cardVariants = {
+    hidden: { opacity: 0, y: 32 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' as const } },
+};
+
 const ShowcaseSection: React.FC = () => {
     const [activeFilter, setActiveFilter] = useState<(typeof FILTERS)[number]>('All');
     const [monitorStatuses, setMonitorStatuses] = useState<Record<number, MonitorRuntimeStatus>>({});
@@ -262,7 +273,20 @@ const ShowcaseSection: React.FC = () => {
                     component="h2"
                     gutterBottom
                     textAlign="center"
-                    sx={{ mb: 2, fontWeight: 'bold' }}
+                    sx={{
+                        mb: 1,
+                        fontWeight: 'bold',
+                        '&::after': {
+                            content: '""',
+                            display: 'block',
+                            width: 56,
+                            height: 3,
+                            borderRadius: 2,
+                            backgroundColor: 'secondary.main',
+                            mx: 'auto',
+                            mt: 1.5,
+                        },
+                    }}
                 >
                     Project Showcase
                 </Typography>
@@ -291,11 +315,19 @@ const ShowcaseSection: React.FC = () => {
                     ))}
                 </Stack>
 
-                <Grid container spacing={4}>
+                <Grid
+                    container
+                    spacing={4}
+                    component={motion.div}
+                    variants={gridContainerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                >
                     {filteredProjects.map((project, index) => {
                         const ProjectIcon = project.icon;
                         return (
-                            <Grid key={index} size={{ xs: 12, md: 4 }}>
+                            <Grid key={index} size={{ xs: 12, md: 4 }} component={motion.div} variants={cardVariants}>
                                 <Paper
                                     elevation={3}
                                     sx={{
@@ -303,6 +335,11 @@ const ShowcaseSection: React.FC = () => {
                                         height: '100%',
                                         display: 'flex',
                                         flexDirection: 'column',
+                                        transition: 'transform 0.22s ease, box-shadow 0.22s ease',
+                                        '&:hover': {
+                                            transform: 'translateY(-5px)',
+                                            boxShadow: (theme) => theme.shadows[8],
+                                        },
                                     }}
                                 >
                                     {/* Header */}

@@ -2,6 +2,19 @@
 import { createTheme, responsiveFontSizes, type PaletteMode } from '@mui/material/styles';
 import { red, blueGrey, lightBlue } from '@mui/material/colors';
 
+// Augment MUI palette to include alternateBackground
+declare module '@mui/material/styles' {
+    interface Palette {
+        alternateBackground: { main: string };
+    }
+    interface PaletteOptions {
+        alternateBackground?: { main?: string };
+    }
+    interface TypeBackground {
+        alternate: string;
+    }
+}
+
 export const createAppTheme = (mode: PaletteMode = 'light') => {
     const isDark = mode === 'dark';
 
@@ -23,9 +36,13 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
             error: {
                 main: red.A400,
             },
+            alternateBackground: {
+                main: isDark ? '#141e28' : '#eef2f5',
+            },
             background: {
                 default: isDark ? '#0f1720' : '#f4f7f9',
                 paper: isDark ? '#18212b' : '#ffffff',
+                alternate: isDark ? '#141e28' : '#eef2f5',
             },
             text: {
                 primary: isDark ? '#e6edf3' : blueGrey[900],
@@ -80,6 +97,18 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
             MuiPaper: {
                 defaultProps: {
                     elevation: 2,
+                },
+                styleOverrides: {
+                    root: {
+                        backgroundImage: 'none',
+                    },
+                },
+            },
+            MuiChip: {
+                styleOverrides: {
+                    root: {
+                        fontWeight: 500,
+                    },
                 },
             },
             MuiContainer: {

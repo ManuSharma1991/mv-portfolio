@@ -27,12 +27,14 @@ export interface ExpertiseAreaProps {
 const ExpertiseCard: React.FC<ExpertiseAreaProps> = ({ icon: AreaIcon, title, description, points }) => {
     return (
         <Paper
-            elevation={3} // Or adjust elevation as desired
+            elevation={3}
             sx={{
                 p: { xs: 2, sm: 3 },
-                // height: '100%', // REMOVE THIS - no longer needed for vertical stack
-                // display: 'flex', // Flex direction is still useful for internal layout
-                // flexDirection: 'column',
+                transition: 'transform 0.22s ease, box-shadow 0.22s ease',
+                '&:hover': {
+                    transform: 'translateY(-3px)',
+                    boxShadow: (theme) => theme.shadows[6],
+                },
             }}
         >
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>

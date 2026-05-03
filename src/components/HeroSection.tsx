@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Container, Typography, Button, Stack } from '@mui/material';
 import { motion } from 'framer-motion';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 const roles = [
     'Platform & Infrastructure Engineer',
@@ -9,140 +11,294 @@ const roles = [
     'Full-Stack Developer',
 ];
 
+const stats = [
+    { value: '40+', label: 'Services' },
+    { value: '5', label: 'Infra Nodes' },
+    { value: '24/7', label: 'Monitored' },
+    { value: '100%', label: 'Self-Hosted' },
+];
+
 const containerVariants = {
     hidden: {},
-    visible: { transition: { staggerChildren: 0.15, delayChildren: 0.4 } },
+    visible: { transition: { staggerChildren: 0.13, delayChildren: 0.15 } },
 };
 
-const badgeVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' as const } },
+const fadeUpVariant = {
+    hidden: { opacity: 0, y: 28 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' as const } },
+};
+
+const badgeContainerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.55 } },
+};
+
+const badgeVariant = {
+    hidden: { opacity: 0, scale: 0.85, y: 8 },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' as const } },
 };
 
 const HeroSection: React.FC = () => {
-    // Function to handle scroll for the CTA button, similar to Navigation
-    const handleScrollToShowcase = () => {
-        const element = document.getElementById('showcase');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+    const scrollTo = (id: string) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     return (
         <Box
-            id="hero" // ID for navigation scrolling
+            id="hero"
             sx={{
-                background: (theme) => `radial-gradient(circle at 15% 20%, ${theme.palette.secondary.main}33, transparent 35%), radial-gradient(circle at 85% 80%, ${theme.palette.primary.light}44, transparent 40%), ${theme.palette.primary.main}`,
-                color: 'primary.contrastText',   // Uses contrast text color from your theme
-                py: { xs: 10, sm: 12, md: 15 },    // Responsive vertical padding
-                textAlign: 'center',
+                position: 'relative',
+                overflow: 'hidden',
+                background: (theme) =>
+                    theme.palette.mode === 'dark'
+                        ? 'linear-gradient(160deg, #0d1b2a 0%, #162032 60%, #0a1520 100%)'
+                        : 'linear-gradient(160deg, #1c313a 0%, #263238 60%, #1a2a34 100%)',
+                color: 'primary.contrastText',
+                py: { xs: 12, sm: 14, md: 18 },
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                minHeight: { xs: '80vh', md: '75vh' }, // Ensure it takes up a good portion of the viewport
-                // You can add a background image or pattern here if desired
-                // backgroundImage: 'url(/path/to/your/image.jpg)',
-                // backgroundSize: 'cover',
-                // backgroundPosition: 'center',
-                overflow: 'hidden',
+                minHeight: { xs: '90vh', md: '88vh' },
             }}
         >
-            <Container
-                maxWidth="md"
-                component={motion.div}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-                <Typography
-                    variant="h1" // Mapped to h2 in theme.ts, but semantically h1 for the page
-                    component="h1" // Ensures it's an h1 tag for SEO
-                    gutterBottom
-                    sx={{
-                        fontWeight: 'bold',
-                        mb: { xs: 2, md: 3 },
-                        fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem' } // Responsive font size
-                    }}
-                >
-                    I build self-hosted infrastructure that runs like production — on hardware you own.
-                </Typography>
+            {/* Animated radial glow blobs */}
+            <Box
+                sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: (theme) =>
+                        `radial-gradient(circle at 18% 22%, ${theme.palette.secondary.main}28 0%, transparent 42%),
+                         radial-gradient(circle at 82% 76%, ${theme.palette.primary.light}1a 0%, transparent 42%),
+                         radial-gradient(circle at 55% 5%, ${theme.palette.secondary.dark}18 0%, transparent 32%)`,
+                    animation: 'heroBlobPulse 10s ease-in-out infinite alternate',
+                    '@keyframes heroBlobPulse': {
+                        '0%': { opacity: 0.65, transform: 'scale(1)' },
+                        '100%': { opacity: 1, transform: 'scale(1.05)' },
+                    },
+                }}
+            />
 
-                <Stack
-                    component={motion.div}
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    direction="row"
-                    flexWrap="wrap"
-                    justifyContent="center"
-                    gap={1.25}
-                    sx={{ mb: 3.5 }}
-                >
-                    {roles.map((role) => (
-                        <motion.span
-                            key={role}
-                            variants={badgeVariants}
-                            style={{
-                                display: 'inline-block',
-                                padding: '5px 16px',
-                                borderRadius: '999px',
-                                border: '1px solid',
-                                borderColor: 'rgba(255,255,255,0.45)',
-                                color: 'inherit',
-                                opacity: 1,
-                                fontSize: 'clamp(0.78rem, 2vw, 0.875rem)',
-                                fontWeight: 600,
-                                letterSpacing: '0.03em',
-                                whiteSpace: 'nowrap',
+            {/* Subtle dot grid overlay */}
+            <Box
+                sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    opacity: 0.045,
+                    backgroundImage: 'radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)',
+                    backgroundSize: '30px 30px',
+                    pointerEvents: 'none',
+                }}
+            />
+
+            <Container maxWidth="md" sx={{ position: 'relative', textAlign: 'center' }}>
+                <motion.div variants={containerVariants} initial="hidden" animate="visible">
+
+                    {/* Greeting */}
+                    <motion.div variants={fadeUpVariant}>
+                        <Typography
+                            component="p"
+                            sx={{
+                                fontSize: { xs: '0.9rem', sm: '1rem' },
+                                fontWeight: 500,
+                                letterSpacing: '0.16em',
+                                textTransform: 'uppercase',
+                                opacity: 0.6,
+                                mb: 0.75,
                             }}
                         >
-                            {role}
-                        </motion.span>
-                    ))}
-                </Stack>
+                            Hi, I'm
+                        </Typography>
+                    </motion.div>
 
-                <Typography
-                    variant="h5" // Mapped to h5 in theme.ts
-                    component="p"  // Render as a p tag
-                    sx={{
-                        mb: { xs: 4, md: 5 },
-                        lineHeight: 1.7,
-                        opacity: 0.9, // Slightly less prominent than the headline
-                        maxWidth: '750px', // Limit width of tagline for readability
-                        mx: 'auto' // Center the tagline block
-                    }}
-                >
-                    My homelab runs 40+ services across Proxmox, Docker, and bare metal — with real monitoring,
-                    air-gapped backups, and a runbook for every failure mode.
-                    That same reliability mindset is what I bring to every platform I design.
-                </Typography>
-                <Button
-                    variant="contained"
-                    color="secondary" // Uses secondary color from your theme
-                    size="large"
-                    href="#showcase"
-                    onClick={handleScrollToShowcase}
-                    // If using react-scroll:
-                    // component={ScrollLink}
-                    // to="contact"
-                    // smooth={true}
-                    // duration={500}
-                    // offset={-70} // Adjust offset based on your AppBar height
-                    sx={{
-                        fontWeight: 'bold',
-                        textTransform: 'uppercase',
-                        padding: { xs: '12px 28px', sm: '15px 35px' },
-                        fontSize: { xs: '1rem', sm: '1.1rem' },
-                        transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
-                        '&:hover': {
-                            transform: 'translateY(-2px)',
-                            boxShadow: (theme) => `0 4px 20px ${theme.palette.secondary.dark}40`, // Subtle glow
-                        }
-                    }}
-                >
-                    See My Work
-                </Button>
+                    {/* Name */}
+                    <motion.div variants={fadeUpVariant}>
+                        <Typography
+                            component="h1"
+                            sx={{
+                                fontWeight: 800,
+                                fontSize: { xs: '2.8rem', sm: '3.8rem', md: '4.6rem' },
+                                lineHeight: 1.05,
+                                mb: 3,
+                                letterSpacing: '-0.015em',
+                                background: (theme) =>
+                                    `linear-gradient(130deg, #ffffff 35%, ${theme.palette.secondary.light} 100%)`,
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                            }}
+                        >
+                            Manu Viswanadha
+                        </Typography>
+                    </motion.div>
+
+                    {/* Role badges */}
+                    <Stack
+                        component={motion.div}
+                        variants={badgeContainerVariants}
+                        direction="row"
+                        flexWrap="wrap"
+                        justifyContent="center"
+                        gap={1.25}
+                        sx={{ mb: 4.5 }}
+                    >
+                        {roles.map((role) => (
+                            <motion.span
+                                key={role}
+                                variants={badgeVariant}
+                                style={{
+                                    display: 'inline-block',
+                                    padding: '5px 16px',
+                                    borderRadius: '999px',
+                                    border: '1px solid rgba(255,255,255,0.22)',
+                                    background: 'rgba(255,255,255,0.07)',
+                                    backdropFilter: 'blur(6px)',
+                                    color: 'inherit',
+                                    fontSize: 'clamp(0.71rem, 1.7vw, 0.82rem)',
+                                    fontWeight: 600,
+                                    letterSpacing: '0.03em',
+                                    whiteSpace: 'nowrap',
+                                }}
+                            >
+                                {role}
+                            </motion.span>
+                        ))}
+                    </Stack>
+
+                    {/* Headline */}
+                    <motion.div variants={fadeUpVariant}>
+                        <Typography
+                            component="h2"
+                            sx={{
+                                fontWeight: 700,
+                                fontSize: { xs: '1.45rem', sm: '1.8rem', md: '2.15rem' },
+                                lineHeight: 1.38,
+                                mb: 2,
+                                opacity: 0.95,
+                                maxWidth: 680,
+                                mx: 'auto',
+                            }}
+                        >
+                            I build self-hosted infrastructure that runs like production.
+                        </Typography>
+                    </motion.div>
+
+                    {/* Tagline */}
+                    <motion.div variants={fadeUpVariant}>
+                        <Typography
+                            component="p"
+                            sx={{
+                                mb: { xs: 4.5, md: 5 },
+                                lineHeight: 1.75,
+                                opacity: 0.68,
+                                maxWidth: 560,
+                                mx: 'auto',
+                                fontSize: { xs: '1rem', sm: '1.07rem' },
+                            }}
+                        >
+                            Real monitoring. Air-gapped backups. A runbook for every failure mode.
+                            That reliability mindset is what I bring to every platform I design.
+                        </Typography>
+                    </motion.div>
+
+                    {/* Stats strip */}
+                    <motion.div variants={fadeUpVariant}>
+                        <Stack
+                            direction="row"
+                            justifyContent="center"
+                            flexWrap="wrap"
+                            gap={{ xs: 3, sm: 5 }}
+                            sx={{
+                                mb: 5,
+                                py: 2.5,
+                                px: { xs: 1, sm: 0 },
+                                borderTop: '1px solid rgba(255,255,255,0.1)',
+                                borderBottom: '1px solid rgba(255,255,255,0.1)',
+                            }}
+                        >
+                            {stats.map((stat) => (
+                                <Box key={stat.label} sx={{ textAlign: 'center' }}>
+                                    <Typography
+                                        sx={{
+                                            fontSize: { xs: '1.6rem', sm: '2rem' },
+                                            fontWeight: 800,
+                                            lineHeight: 1,
+                                            color: 'secondary.light',
+                                        }}
+                                    >
+                                        {stat.value}
+                                    </Typography>
+                                    <Typography
+                                        sx={{
+                                            fontSize: '0.7rem',
+                                            opacity: 0.58,
+                                            letterSpacing: '0.07em',
+                                            textTransform: 'uppercase',
+                                            mt: 0.5,
+                                        }}
+                                    >
+                                        {stat.label}
+                                    </Typography>
+                                </Box>
+                            ))}
+                        </Stack>
+                    </motion.div>
+
+                    {/* CTAs */}
+                    <motion.div variants={fadeUpVariant}>
+                        <Stack
+                            direction={{ xs: 'column', sm: 'row' }}
+                            spacing={2}
+                            justifyContent="center"
+                        >
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                size="large"
+                                endIcon={<ArrowForwardIcon />}
+                                onClick={() => scrollTo('showcase')}
+                                sx={{
+                                    fontWeight: 700,
+                                    px: 4,
+                                    py: 1.5,
+                                    fontSize: '1rem',
+                                    borderRadius: '8px',
+                                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                                    '&:hover': {
+                                        transform: 'translateY(-3px)',
+                                        boxShadow: (theme) => `0 10px 30px ${theme.palette.secondary.main}60`,
+                                    },
+                                }}
+                            >
+                                View My Work
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                size="large"
+                                endIcon={<EmailOutlinedIcon />}
+                                onClick={() => scrollTo('contact')}
+                                sx={{
+                                    fontWeight: 700,
+                                    px: 4,
+                                    py: 1.5,
+                                    fontSize: '1rem',
+                                    borderRadius: '8px',
+                                    borderColor: 'rgba(255,255,255,0.32)',
+                                    color: 'rgba(255,255,255,0.88)',
+                                    transition: 'transform 0.2s ease, background 0.2s ease, border-color 0.2s ease',
+                                    '&:hover': {
+                                        borderColor: 'rgba(255,255,255,0.85)',
+                                        background: 'rgba(255,255,255,0.09)',
+                                        transform: 'translateY(-3px)',
+                                    },
+                                }}
+                            >
+                                Get In Touch
+                            </Button>
+                        </Stack>
+                    </motion.div>
+
+                </motion.div>
             </Container>
         </Box>
     );

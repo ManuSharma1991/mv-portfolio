@@ -1,6 +1,7 @@
 // src/components/ExpertiseSection/ExpertiseSection.tsx
 import React from 'react';
 import { Box, Container, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
 import CodeIcon from '@mui/icons-material/Code';
 import BuildIcon from '@mui/icons-material/Build';
 import DnsIcon from '@mui/icons-material/Dns';
@@ -116,17 +117,32 @@ const ExpertiseSection: React.FC = () => {
                     component="h2"
                     gutterBottom
                     textAlign="center"
-                    sx={{ mb: { xs: 4, md: 6 }, fontWeight: 'bold' }}
+                    sx={{
+                        mb: { xs: 4, md: 6 },
+                        fontWeight: 'bold',
+                        '&::after': {
+                            content: '""',
+                            display: 'block',
+                            width: 56,
+                            height: 3,
+                            borderRadius: 2,
+                            backgroundColor: 'secondary.main',
+                            mx: 'auto',
+                            mt: 1.5,
+                        },
+                    }}
                 >
                     My Expertise
                 </Typography>
 
                 {expertiseData.map((area, index) => (
-                    <Box
+                    <motion.div
                         key={area.title}
-                        // Add bottom margin to all but the last card for spacing
-                        // Or, if your ExpertiseCard's Paper has elevation, it might provide enough visual separation
-                        sx={{ mb: index < expertiseData.length - 1 ? 4 : 0 }}
+                        initial={{ opacity: 0, y: 28 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.15 }}
+                        transition={{ duration: 0.55, ease: 'easeOut', delay: index * 0.1 }}
+                        style={{ marginBottom: index < expertiseData.length - 1 ? 32 : 0 }}
                     >
                         <ExpertiseCard
                             icon={area.icon}
@@ -134,9 +150,7 @@ const ExpertiseSection: React.FC = () => {
                             description={area.description}
                             points={area.points}
                         />
-                        {/* Optional: You could add a <Divider /> component here if you want stronger visual separation between cards */}
-                        {/* {index < expertiseData.length - 1 && <Divider sx={{ my: 4 }} />} */}
-                    </Box>
+                    </motion.div>
                 ))}
             </Container>
         </Box>
