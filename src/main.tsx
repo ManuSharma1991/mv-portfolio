@@ -2,9 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import theme from './theme';
+import { createAppTheme } from './theme';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useMemo, useState } from 'react';
+import type { PaletteMode } from '@mui/material';
 
 // Import Roboto font weights from @fontsource
 // Import only the weights you actually use in your theme.ts to keep bundle size down.
@@ -20,11 +22,25 @@ if (!rootElement) throw new Error('Failed to find the root element');
 
 const root = ReactDOM.createRoot(rootElement);
 
-root.render(
-  <React.StrictMode>
+const RootApp: React.FC = () => {
+  const [mode, setMode] = useState<PaletteMode>('light');
+
+  const theme = useMemo(() => createAppTheme(mode), [mode]);
+
+  const toggleMode = () => {
+    setMode((current) => (current === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <App colorMode={mode} onToggleColorMode={toggleMode} />
     </ThemeProvider>
+  );
+};
+
+root.render(
+  <React.StrictMode>
+    <RootApp />
   </React.StrictMode>
 );

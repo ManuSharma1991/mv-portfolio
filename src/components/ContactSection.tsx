@@ -1,19 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Box,
     Container,
     Typography,
     Button,
-    Grid, // For form layout
-    Paper, // Optional: To wrap the contact info or form
+    Grid,
+    Paper,
+    Divider,
+    TextField,
+    Alert,
+    Snackbar,
 } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
-import GitHubIcon from '@mui/icons-material/GitHub'; // Optional
+import GitHubIcon from '@mui/icons-material/GitHub';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import emailjs from '@emailjs/browser';
 
 const ContactSection: React.FC = () => {
-    const yourEmail = "manu.viswanad@gmail.com"; // <-- REPLACE THIS
-    // const yourLinkedInUrl = "https://www.linkedin.com/in/your-actual-linkedin-profile/"; // <-- REPLACE THIS
-    const yourGitHubUrl = "https://github.com/ManuSharma1991"; // <-- REPLACE THIS (or remove if not desired here)
+    const yourEmail = 'manu.viswanad@gmail.com';
+    const yourGitHubUrl = 'https://github.com/ManuSharma1991';
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: '',
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState<string | null>(null);
+    const [copied, setCopied] = useState(false);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleCopyEmail = async () => {
+        try {
+            await navigator.clipboard.writeText(yourEmail);
+            setCopied(true);
+        } catch {
+            setSnackbarMessage('Unable to copy email automatically.');
+        }
+    };
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (!formData.name || !formData.email || !formData.message) {
+            setSnackbarMessage('Please fill all fields before sending.');
+            return;
+        }
+
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        if (!serviceId || !templateId || !publicKey) {
+            setSnackbarMessage('Email service is not configured yet. Add EmailJS env variables.');
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            await emailjs.send(
+                serviceId,
+                templateId,
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    message: formData.message,
+                },
+                { publicKey }
+            );
+
+            setFormData({ name: '', email: '', message: '' });
+            setSnackbarMessage('Message sent successfully. I will get back to you soon.');
+        } catch {
+            setSnackbarMessage('Something went wrong while sending. Please use the email button.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <Box
@@ -53,6 +120,18 @@ const ContactSection: React.FC = () => {
                                 Email Me
                             </Button>
                         </Grid>
+                        <Grid size={{ xs: 12, sm: "auto" }}>
+                            <Button
+                                variant="text"
+                                color="secondary"
+                                startIcon={<ContentCopyIcon />}
+                                onClick={handleCopyEmail}
+                                size="large"
+                                sx={{ width: { xs: '100%', sm: 'auto' } }}
+                            >
+                                Copy Email
+                            </Button>
+                        </Grid>
                         {/* <Grid size={{ xs: 12, sm: "auto" }}>
                             <Button
                                 variant="outlined"
@@ -84,76 +163,86 @@ const ContactSection: React.FC = () => {
                             </Grid>
                         )}
                     </Grid>
+
+                    {copied && (
+                        <Alert severity="success" sx={{ mt: 3 }} onClose={() => setCopied(false)}>
+                            Email copied to clipboard.
+                        </Alert>
+                    )}
                 </Paper>
 
-                {/* Placeholder for a future contact form */}
-                {/*
-        <Divider sx={{ my: { xs: 4, md: 6 } }}>
-          <Typography variant="overline">Or Send a Direct Message</Typography>
-        </Divider>
+                <Divider sx={{ my: { xs: 4, md: 6 } }}>
+                    <Typography variant="overline">Or Send a Direct Message</Typography>
+                </Divider>
 
-        <Paper elevation={3} sx={{ p: { xs: 2, sm: 3, md: 4 }, mt: 2 }}>
-          <Box
-            component="form"
-            // onSubmit={handleSubmit} // You'll define this later
-            noValidate 
-            autoComplete="off"
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  required
-                  id="name"
-                  name="name"
-                  label="Your Name"
-                  variant="outlined"
-                  // value={formData.name}
-                  // onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  required
-                  id="email"
-                  name="email"
-                  label="Your Email"
-                  type="email"
-                  variant="outlined"
-                  // value={formData.email}
-                  // onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  required
-                  id="message"
-                  name="message"
-                  label="Your Message"
-                  multiline
-                  rows={5}
-                  variant="outlined"
-                  // value={formData.message}
-                  // onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sx={{ textAlign: 'center' }}>
-                <Button 
-                  type="submit" 
-                  variant="contained" 
-                  color="secondary" 
-                  size="large"
-                  sx={{ mt: 2, py: 1.5, px: 5 }}
+                <Paper elevation={3} sx={{ p: { xs: 2, sm: 3, md: 4 }, mt: 2 }}>
+                    <Box component="form" onSubmit={handleSubmit} noValidate autoComplete="off">
+                        <Grid container spacing={2}>
+                            <Grid size={{ xs: 12, sm: 6 }}>
+                                <TextField
+                                    fullWidth
+                                    required
+                                    id="name"
+                                    name="name"
+                                    label="Your Name"
+                                    variant="outlined"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6 }}>
+                                <TextField
+                                    fullWidth
+                                    required
+                                    id="email"
+                                    name="email"
+                                    label="Your Email"
+                                    type="email"
+                                    variant="outlined"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid size={{ xs: 12 }}>
+                                <TextField
+                                    fullWidth
+                                    required
+                                    id="message"
+                                    name="message"
+                                    label="Your Message"
+                                    multiline
+                                    rows={5}
+                                    variant="outlined"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid size={{ xs: 12 }} sx={{ textAlign: 'center' }}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="secondary"
+                                    size="large"
+                                    disabled={isSubmitting}
+                                    sx={{ mt: 2, py: 1.5, px: 5 }}
+                                >
+                                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Paper>
+
+                <Snackbar
+                    open={!!snackbarMessage}
+                    autoHideDuration={4000}
+                    onClose={() => setSnackbarMessage(null)}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 >
-                  Send Message
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-        </Paper>
-        */}
+                    <Alert severity="info" onClose={() => setSnackbarMessage(null)}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
             </Container>
         </Box>
     );

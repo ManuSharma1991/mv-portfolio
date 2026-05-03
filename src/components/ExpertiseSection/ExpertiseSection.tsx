@@ -9,87 +9,92 @@ import ExpertiseCard, { type ExpertiseAreaProps } from './ExpertiseCard';
 
 const expertiseData: ExpertiseAreaProps[] = [
     {
-        icon: CodeIcon,
-        title: 'MERN Stack Development',
-        description: 'My MERN stack development experience covers the full spectrum of application creation, from intricate frontend UIs to robust backend logic and data management:',
+        icon: DnsIcon,
+        title: 'Proxmox Platform Engineering & SRE',
+        description: 'My primary expertise is building and operating resilient self-hosted platforms with production SRE practices:',
         points: [
             {
-                subTitle: 'Dynamic & Interactive Frontend Development (React & Redux Toolkit):',
+                subTitle: 'Virtualization & Service Topology:',
                 details: [
-                    'Expertise in building complex, state-driven user interfaces with React and Redux Toolkit.',
-                    'Proven ability to develop features like custom, interactive timelines, real-time previews, and sophisticated data visualizations.',
-                    'Proficient in integrating libraries like D3.js to render dynamic overlays (e.g., Picture-in-Picture, text, images) on media elements.',
-                    'Experience building features from scratch, such as comprehensive media libraries for browsing and selecting assets.',
-                    'Developed functionalities for direct media capture within the browser, including video, audio, and screen recording.',
+                    'Design and operation of Proxmox VE clusters with role-driven LXC/VM segmentation and deterministic startup dependencies.',
+                    'GPU render-node sharing for media and ML workloads while preserving host-level control and stability.',
+                    'Dedicated backup plane via Proxmox Backup Server with recovery-oriented operating procedures.',
                 ],
             },
             {
-                subTitle: 'Robust Backend Development (Node.js & Express.js):',
+                subTitle: 'Storage & Data Reliability:',
                 details: [
-                    'Skilled in creating secure and efficient RESTful APIs with Node.js and Express.js.',
-                    'Designing clear API contracts and data structures (e.g., custom JSON formats for complex operations) that enable decoupled and extensible systems.',
+                    'ZFS pool operations, scrub strategy, snapshot workflows, and import recovery procedures.',
+                    'Unified storage namespace using mergerfs with parity-focused protection strategies for large media datasets.',
+                    'Capacity and performance planning across mixed SSD/HDD storage profiles.',
                 ],
             },
             {
-                subTitle: 'Efficient Data Management (MongoDB):',
-                details: ['Designing MongoDB schemas optimized for application performance and scalability.'],
-            },
-            {
-                subTitle: 'Architectural Foresight:',
-                details: ['A key focus in my development process is creating extensible architectures. For example, the design of core data structures allows for advanced capabilities such as programmatically generating entire complex sequences or workflows without manual UI interaction.'],
+                subTitle: 'Operational Excellence (SRE):',
+                details: [
+                    'End-to-end observability using centralized logs, health checks, metrics, and service-level status reporting.',
+                    'Incident response playbooks for service recovery, storage failures, and network degradation events.',
+                    'Infrastructure automation with GitHub Actions and Ansible-driven operational routines.',
+                ],
             },
         ],
     },
     {
         icon: BuildIcon,
-        title: 'Problem Solving & Architectural Design',
-        description: 'My expertise includes dissecting intricate UI/UX challenges and engineering elegant, functional solutions. For example:',
+        title: 'Security, Networking & Platform Operations',
+        description: 'I build secure, maintainable network and platform foundations for self-hosted systems:',
         points: [
             {
-                subTitle: '1. Pixel-to-Time Translation for Dynamic Timelines:',
+                subTitle: 'Network Segmentation & Traffic Control:',
                 details: [
-                    'Achieved using Core React & Redux Toolkit for event handling and state management.',
-                    'Developed custom mathematical logic and timer-based mechanisms for precise pixel-to-time mapping.',
-                    'Ensured real-time responsiveness for a smooth user experience.',
-                    'This foundational work significantly simplified subsequent feature implementation.',
+                    'VLAN-based segmentation for workload isolation and blast-radius reduction.',
+                    'Virtualized gateway routing and policy enforcement across heterogeneous services.',
+                    'Service exposure models balancing private/internal and public access boundaries.',
                 ],
             },
             {
-                subTitle: '2. Decoupled Preview & Backend Processing for Complex Edits:',
+                subTitle: 'Identity, Access & Perimeter Security:',
                 details: [
-                    'Implemented client-side visual feedback for user actions purely through CSS manipulations on the frontend.',
-                    'Designed a precise and extensible JSON instruction set as a contract between frontend and backend.',
-                    'Enabled sequential backend processing based on this structured JSON.',
-                    'This approach made the system highly extensible and maintainable.',
+                    'SSO-based access patterns for administrative and user-facing applications.',
+                    'Reverse-proxy and TLS lifecycle management for secure ingress and certificate hygiene.',
+                    'Threat monitoring and automated enforcement for common attack vectors.',
+                ],
+            },
+            {
+                subTitle: 'Runbooks & Platform Maintainability:',
+                details: [
+                    'Documented operational runbooks for routine maintenance, emergency recovery, and onboarding.',
+                    'Controlled change management with roll-forward/rollback thinking and service impact awareness.',
+                    'Pragmatic, reliability-first decisions that keep systems stable under growth.',
                 ],
             },
         ],
     },
     {
-        icon: DnsIcon,
-        title: 'Deployment, CI/CD & Infrastructure Management',
-        description: 'Beyond development, I bring practical experience in deploying and managing web applications, ensuring they run reliably and efficiently:',
+        icon: CodeIcon,
+        title: 'MERN Application Development',
+        description: 'Alongside platform engineering, I build full-stack web products with MERN when application delivery is part of the engagement:',
         points: [
             {
-                subTitle: 'Containerization with Docker:',
+                subTitle: 'Frontend Engineering (React + TypeScript):',
                 details: [
-                    'Proficient in writing Dockerfiles (including multi-stage builds for React & Node.js).',
-                    'Experienced in managing containerized services (Portainer, Docker CLI) for numerous self-hosted applications.',
+                    'Responsive UI development with component-driven architecture and performance-aware rendering.',
+                    'Dashboard and workflow-oriented interfaces for operational and productivity use cases.',
+                    'Accessible interaction patterns with maintainable design systems.',
                 ],
             },
             {
-                subTitle: 'Linux Server Administration & Self-Hosting:',
+                subTitle: 'Backend APIs (Node.js + Express):',
                 details: [
-                    'Over a decade of experience as a Linux user, adept at server administration tasks.',
-                    'Successfully manage a personal homelab (Raspberry Pi based) hosting diverse services, orchestrated via Nginx Proxy Manager.',
-                    'This very landing page is containerized with Docker and self-hosted on this infrastructure.',
+                    'REST API design, validation, and service integration with clear operational boundaries.',
+                    'Container-friendly deployment patterns for predictable runtime behavior.',
                 ],
             },
             {
-                subTitle: 'CI/CD Automation:',
+                subTitle: 'Data Layer (MongoDB):',
                 details: [
-                    'Practical experience with GitHub Actions and Jenkins for personal projects.',
-                    'Automated workflows for building Docker images and deploying applications.',
+                    'Practical schema design for application features and operational reporting needs.',
+                    'Data modeling choices that support incremental product evolution.',
                 ],
             },
         ],

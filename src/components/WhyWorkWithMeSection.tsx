@@ -1,64 +1,49 @@
 import React from 'react';
-import {
-    Box,
-    Container,
-    Typography,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText, // Optional: wrap the list in a Paper for a card-like feel
-} from '@mui/material';
-import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
-import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
-import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined';
-import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
-import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import RuleOutlinedIcon from '@mui/icons-material/RuleOutlined';
+import { Box, Container, Grid, Paper, Typography } from '@mui/material';
+import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
+import MonitorHeartOutlinedIcon from '@mui/icons-material/MonitorHeartOutlined';
+import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
+import DnsOutlinedIcon from '@mui/icons-material/DnsOutlined';
 
-
-interface Reason {
+interface Principle {
     icon: React.ElementType;
-    text: string;
+    title: string;
+    body: string;
 }
 
-const reasonsToWorkWithMe: Reason[] = [
+const principles: Principle[] = [
     {
-        icon: LightbulbOutlinedIcon,
-        text: 'Rapid Problem Understanding & Versatile Solutions: I excel at quickly grasping project requirements and presenting 2-3 clear, well-reasoned alternative solutions.',
+        icon: ShieldOutlinedIcon,
+        title: 'Designed for Failure, Not Just Success',
+        body: "Every system I build assumes failure will happen — disk issues, network drops, service crashes. That’s why I design with isolation, recovery paths, and backup-first architecture from day one.",
     },
     {
-        icon: RuleOutlinedIcon,
-        text: 'Proven Problem-Solving & Architectural Skills: My experience involves tackling complex technical challenges and architecting robust, maintainable solutions.',
+        icon: MonitorHeartOutlinedIcon,
+        title: 'Operational by Default',
+        body: "I don’t stop at deployment. Every platform includes monitoring, alerting, logging, and runbooks — so it can be operated, not just launched.",
     },
     {
-        icon: CodeOutlinedIcon,
-        text: 'Full-Spectrum Technical Capability: Expertise spanning full-stack MERN development and practical DevOps skills (Docker, Linux, self-hosting).',
+        icon: AccountTreeOutlinedIcon,
+        title: 'Controlled Complexity',
+        body: 'Instead of stacking tools blindly, I design systems with clear boundaries — ingress, compute, storage, and observability — keeping things understandable and maintainable as they grow.',
     },
     {
-        icon: SchoolOutlinedIcon,
-        text: 'Commitment to Continuous Learning & Modern Practices: Dedicated self-learning and practical application ensure I leverage current and effective technologies.',
-    },
-    {
-        icon: ForumOutlinedIcon,
-        text: 'Clear Communication & Collaboration: I believe in transparent and timely communication throughout the project lifecycle.',
-    },
-    {
-        icon: SpeedOutlinedIcon,
-        text: 'Pragmatic & Efficient Delivery: I focus on delivering functional and impactful solutions efficiently.',
+        icon: DnsOutlinedIcon,
+        title: 'Real Systems, Not Demos',
+        body: 'My work runs continuously — serving media, managing data, handling authentication — with real uptime and recovery expectations, not just a proof-of-concept.',
     },
 ];
 
 const WhyWorkWithMeSection: React.FC = () => {
     return (
         <Box
-            id="why-work-with-me" // ID for navigation
+            id="why-work-with-me"
             sx={{
                 py: { xs: 6, md: 8 },
-                backgroundColor: 'alternateBackground.main', // Define this in your theme, e.g., a slightly different grey or a very light primary
-                // Or use: theme => theme.palette.grey[100] or theme.palette.background.paper
+                backgroundColor: 'alternateBackground.main',
             }}
         >
-            <Container maxWidth="md"> {/* "md" for good readability of list items */}
+            <Container maxWidth="lg">
                 <Typography
                     variant="h2"
                     component="h2"
@@ -66,48 +51,49 @@ const WhyWorkWithMeSection: React.FC = () => {
                     textAlign="center"
                     sx={{ mb: 2, fontWeight: 'bold' }}
                 >
-                    Why Work With Me?
+                    How I Build Reliable Systems
                 </Typography>
                 <Typography
                     variant="h6"
                     component="p"
                     color="text.secondary"
                     textAlign="center"
-                    paragraph
-                    sx={{ mb: { xs: 4, md: 6 } }}
+                    sx={{ mb: { xs: 4, md: 6 }, maxWidth: 620, mx: 'auto' }}
                 >
-                    Choosing the right developer is key to your project's success. Here’s what I bring to the table:
+                    Principles I apply to every platform I design — whether it’s a homelab service or a production deployment.
                 </Typography>
 
-                {/* Optional: Wrap List in Paper for a slightly different visual treatment */}
-                {/* <Paper elevation={2} sx={{ p: { xs: 2, sm: 3 } }}> */}
-                <List disablePadding>
-                    {reasonsToWorkWithMe.map((reason, index) => {
-                        const ReasonIcon = reason.icon;
+                <Grid container spacing={3}>
+                    {principles.map((p) => {
+                        const Icon = p.icon;
                         return (
-                            <ListItem
-                                key={index}
-                                sx={{
-                                    alignItems: 'flex-start', // Aligns icon with the top of the text
-                                    mb: 2.5, // Spacing between list items
-                                    // If not using Paper, you could add a light background/border here for each item
-                                    // backgroundColor: 'background.paper', 
-                                    // borderRadius: 1, 
-                                    // p: 2
-                                }}
-                            >
-                                <ListItemIcon sx={{ minWidth: '40px', mt: '5px', color: 'secondary.main' /* Icon color */ }}>
-                                    <ReasonIcon fontSize="medium" />
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={reason.text}
-                                    primaryTypographyProps={{ variant: 'body1', lineHeight: 1.7 }}
-                                />
-                            </ListItem>
+                            <Grid key={p.title} size={{ xs: 12, sm: 6 }}>
+                                <Paper
+                                    elevation={2}
+                                    sx={{
+                                        p: { xs: 2.5, md: 3 },
+                                        height: '100%',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 1.5,
+                                        borderLeft: '3px solid',
+                                        borderColor: 'secondary.main',
+                                    }}
+                                >
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                                        <Icon sx={{ color: 'secondary.main', fontSize: '1.75rem', flexShrink: 0 }} />
+                                        <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.3 }}>
+                                            {p.title}
+                                        </Typography>
+                                    </Box>
+                                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
+                                        {p.body}
+                                    </Typography>
+                                </Paper>
+                            </Grid>
                         );
                     })}
-                </List>
-                {/* </Paper> */}
+                </Grid>
             </Container>
         </Box>
     );

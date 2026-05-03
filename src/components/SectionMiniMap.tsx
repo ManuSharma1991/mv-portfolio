@@ -16,6 +16,7 @@ const sectionsForMinimap: SectionItem[] = [
     { id: 'why-work-with-me', label: 'Why Me?' },
     { id: 'about-me', label: 'About Me' },
     { id: 'showcase', label: 'Showcase' },
+    { id: 'homelab-architecture', label: 'Homelab Map' },
     { id: 'contact', label: 'Contact' },
 ];
 

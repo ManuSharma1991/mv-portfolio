@@ -14,8 +14,12 @@ import {
     ListItemButton,
     ListItemText,
     Avatar, // Import Avatar if you want to use it for a small pic
+    Tooltip,
 } from '@mui/material';
+import type { PaletteMode } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 // Optional: Import your small logo/image if you have one
 // import smallLogo from '../assets/logo-sm.png'; // Adjust path and filename
@@ -32,6 +36,7 @@ const navItems: NavItem[] = [
     { label: 'Why Me?', id: 'why-work-with-me' },
     { label: 'About', id: 'about-me' },
     { label: 'Showcase', id: 'showcase' },
+    { label: 'Homelab', id: 'homelab-architecture' },
     { label: 'Contact', id: 'contact' },
 ];
 
@@ -45,7 +50,12 @@ const handleScrollTo = (id: string) => {
     }
 };
 
-const Navigation: React.FC = () => {
+interface NavigationProps {
+    colorMode: PaletteMode;
+    onToggleColorMode: () => void;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ colorMode, onToggleColorMode }) => {
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
@@ -68,6 +78,11 @@ const Navigation: React.FC = () => {
                         </ListItemButton>
                     </ListItem>
                 ))}
+                <ListItem disablePadding>
+                    <ListItemButton sx={{ textAlign: 'center' }} onClick={onToggleColorMode}>
+                        <ListItemText primary={colorMode === 'light' ? 'Dark Mode' : 'Light Mode'} />
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Box>
     );
@@ -157,6 +172,11 @@ const Navigation: React.FC = () => {
                                     {item.label}
                                 </Button>
                             ))}
+                            <Tooltip title={colorMode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}>
+                                <IconButton color="inherit" onClick={onToggleColorMode} sx={{ ml: 1 }}>
+                                    {colorMode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+                                </IconButton>
+                            </Tooltip>
                         </Box>
 
                         {/* Mobile Menu Icon */}

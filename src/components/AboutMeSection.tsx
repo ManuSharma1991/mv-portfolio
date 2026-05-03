@@ -37,7 +37,7 @@ const AboutMeSection: React.FC = () => {
                     color="text.secondary"
                     sx={{ mb: { xs: 4, md: 6 }, fontWeight: 500 }}
                 >
-                    My Journey: From IT Roots to a Passion for Self-Hosted Solutions
+                    Platform Engineer. SRE Practitioner. Full-Stack Developer.
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center"> {/* Use Grid for layout */}
@@ -57,47 +57,20 @@ const AboutMeSection: React.FC = () => {
 
                     {/* Grid Item for Text */}
                     <Grid size={{ xs: 12, md: 8 }}> {/* Takes up 8 out of 12 columns on medium screens and up */}
-                        <Box> {/* Optional Box wrapper for text if needed for more specific styling */}
+                        <Box>
                             <Typography
                                 variant="body1"
                                 paragraph
-                                sx={{
-                                    lineHeight: 1.8,
-                                    fontSize: { xs: '1rem', md: '1.1rem' }, // Slightly larger on bigger screens
-                                    textAlign: 'justify',
-                                    hyphens: 'auto',
-                                }}
+                                sx={{ lineHeight: 1.8, fontSize: { xs: '1rem', md: '1.05rem' } }}
                             >
-                                My journey with technology is one of continuous learning, practical application, and a genuine passion for building things that work.
-                                After an initial period in the IT industry, my path took a different turn for a few years, but my fascination with coding and system building never faded.
+                                I build and operate self-hosted platforms that behave like production systems — with a focus on reliability, recovery, and long-term maintainability.
                             </Typography>
                             <Typography
                                 variant="body1"
                                 paragraph
-                                sx={{
-                                    lineHeight: 1.8,
-                                    fontSize: { xs: '1rem', md: '1.1rem' },
-                                    textAlign: 'justify',
-                                    hyphens: 'auto',
-                                }}
+                                sx={{ lineHeight: 1.8, fontSize: { xs: '1rem', md: '1.05rem' } }}
                             >
-                                More recently, I've dived back into my technical passions headfirst, focusing on MERN stack development and the fascinating world of DevOps and self-hosting.
-                                This isn't just theoretical for me; I've built and continue to expand my own homelab server environment from the ground up.
-                                There's immense satisfaction in this – like setting up a media server that allows a friend overseas to access our favorite TV shows, or providing a personal 1TB cloud storage solution for my brother.
-                                These personal projects are where I rigorously hone my skills with Docker, Linux administration, and network configuration.
-                            </Typography>
-                            <Typography
-                                variant="body1"
-                                paragraph
-                                sx={{
-                                    lineHeight: 1.8,
-                                    fontSize: { xs: '1rem', md: '1.1rem' },
-                                    textAlign: 'justify',
-                                    hyphens: 'auto',
-                                    mb: 0, // Remove bottom margin from the last paragraph if needed
-                                }}
-                            >
-                                This hands-on, problem-solving approach is what I bring to my freelance work. I'm committed to leveraging these modern skills to create valuable, efficient, and reliable web solutions for my clients.
+                                My work sits at the intersection of platform engineering and application development. I run a multi-service environment built on Proxmox, Docker, and secure ingress, with real monitoring, backup workflows, and failure-tested runbooks. Alongside infrastructure, I build full-stack applications when product interfaces are needed — carrying the same operational discipline through to the application layer.
                             </Typography>
                         </Box>
                     </Grid>

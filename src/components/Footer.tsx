@@ -33,8 +33,32 @@ const Footer: React.FC = () => {
                 <Typography variant="body2" align="center" gutterBottom>
                     © {currentYear} Manu Viswanadha. All rights reserved.
                 </Typography>
-                <Typography variant="caption" display="block" align="center" sx={{ fontStyle: 'italic', mb: 2 }}>
-                    This website is proudly self-hosted on a Raspberry Pi using Docker.
+                <Typography variant="caption" display="block" align="center" sx={{ fontStyle: 'italic', mb: 1 }}>
+                    This website is  self-hosted on Proxmox host using Docker.
+                </Typography>
+                <Typography variant="caption" display="block" align="center" sx={{ color: 'grey.600', mb: 2 }}>
+                    Third-party service logos and icons used on this site are trademarks of their respective owners.
+                    Many icons are sourced from{' '}
+                    <Box
+                        component="a"
+                        href="https://simpleicons.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{ color: 'grey.500', '&:hover': { color: 'grey.300' } }}
+                    >
+                        Simple Icons
+                    </Box>
+                    {' '}and made available under the{' '}
+                    <Box
+                        component="a"
+                        href="https://creativecommons.org/publicdomain/zero/1.0/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{ color: 'grey.500', '&:hover': { color: 'grey.300' } }}
+                    >
+                        CC0 1.0 Universal
+                    </Box>
+                    {' '}license. Use of these logos does not imply endorsement.
                 </Typography>
 
                 {/* Optional: Social Media Links */}

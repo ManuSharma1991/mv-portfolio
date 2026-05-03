@@ -1,17 +1,30 @@
 import React from 'react';
-import { Box, Container, Typography, Button } from '@mui/material';
-// If using react-scroll for the button, you'd import its Link component
-// import { Link as ScrollLink } from 'react-scroll';
+import { Box, Container, Typography, Button, Stack } from '@mui/material';
+import { motion } from 'framer-motion';
+
+const roles = [
+    'Platform & Infrastructure Engineer',
+    'Self-Hosting Specialist',
+    'SRE Practitioner',
+    'Full-Stack Developer',
+];
+
+const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.15, delayChildren: 0.4 } },
+};
+
+const badgeVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' as const } },
+};
 
 const HeroSection: React.FC = () => {
     // Function to handle scroll for the CTA button, similar to Navigation
-    const handleScrollToContact = () => {
-        const element = document.getElementById('contact'); // ID of your ContactSection
+    const handleScrollToShowcase = () => {
+        const element = document.getElementById('showcase');
         if (element) {
-            element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-            });
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
 
@@ -19,7 +32,7 @@ const HeroSection: React.FC = () => {
         <Box
             id="hero" // ID for navigation scrolling
             sx={{
-                backgroundColor: 'primary.main', // Uses primary color from your theme
+                background: (theme) => `radial-gradient(circle at 15% 20%, ${theme.palette.secondary.main}33, transparent 35%), radial-gradient(circle at 85% 80%, ${theme.palette.primary.light}44, transparent 40%), ${theme.palette.primary.main}`,
                 color: 'primary.contrastText',   // Uses contrast text color from your theme
                 py: { xs: 10, sm: 12, md: 15 },    // Responsive vertical padding
                 textAlign: 'center',
@@ -32,9 +45,16 @@ const HeroSection: React.FC = () => {
                 // backgroundImage: 'url(/path/to/your/image.jpg)',
                 // backgroundSize: 'cover',
                 // backgroundPosition: 'center',
+                overflow: 'hidden',
             }}
         >
-            <Container maxWidth="md"> {/* Constrains the width of the content */}
+            <Container
+                maxWidth="md"
+                component={motion.div}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
                 <Typography
                     variant="h1" // Mapped to h2 in theme.ts, but semantically h1 for the page
                     component="h1" // Ensures it's an h1 tag for SEO
@@ -45,8 +65,43 @@ const HeroSection: React.FC = () => {
                         fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem' } // Responsive font size
                     }}
                 >
-                    Manu Viswanadha: MERN Stack Development & Self-Hosted Solutions – Tailored to Your Needs.
+                    I build self-hosted infrastructure that runs like production — on hardware you own.
                 </Typography>
+
+                <Stack
+                    component={motion.div}
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    direction="row"
+                    flexWrap="wrap"
+                    justifyContent="center"
+                    gap={1.25}
+                    sx={{ mb: 3.5 }}
+                >
+                    {roles.map((role) => (
+                        <motion.span
+                            key={role}
+                            variants={badgeVariants}
+                            style={{
+                                display: 'inline-block',
+                                padding: '5px 16px',
+                                borderRadius: '999px',
+                                border: '1px solid',
+                                borderColor: 'rgba(255,255,255,0.45)',
+                                color: 'inherit',
+                                opacity: 1,
+                                fontSize: 'clamp(0.78rem, 2vw, 0.875rem)',
+                                fontWeight: 600,
+                                letterSpacing: '0.03em',
+                                whiteSpace: 'nowrap',
+                            }}
+                        >
+                            {role}
+                        </motion.span>
+                    ))}
+                </Stack>
+
                 <Typography
                     variant="h5" // Mapped to h5 in theme.ts
                     component="p"  // Render as a p tag
@@ -58,15 +113,16 @@ const HeroSection: React.FC = () => {
                         mx: 'auto' // Center the tagline block
                     }}
                 >
-                    Building intuitive web experiences with the MERN stack and offering robust self-hosting expertise.
-                    My approach involves rapidly grasping your project needs to propose versatile and efficient solutions tailored for you.
+                    My homelab runs 40+ services across Proxmox, Docker, and bare metal — with real monitoring,
+                    air-gapped backups, and a runbook for every failure mode.
+                    That same reliability mindset is what I bring to every platform I design.
                 </Typography>
                 <Button
                     variant="contained"
                     color="secondary" // Uses secondary color from your theme
                     size="large"
-                    href="#contact"
-                    onClick={handleScrollToContact}
+                    href="#showcase"
+                    onClick={handleScrollToShowcase}
                     // If using react-scroll:
                     // component={ScrollLink}
                     // to="contact"
@@ -85,7 +141,7 @@ const HeroSection: React.FC = () => {
                         }
                     }}
                 >
-                    Let's Find Your Solution
+                    See My Work
                 </Button>
             </Container>
         </Box>

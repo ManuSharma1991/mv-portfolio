@@ -1,5 +1,6 @@
 // src/App.tsx
 import { Box } from '@mui/material';
+import type { PaletteMode } from '@mui/material';
 
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
@@ -12,6 +13,13 @@ import Footer from './components/Footer';
 import ScrollToTopButton from './components/ScrollToTopButton'; // <-- IMPORT
 import ScrollProgressBar from './components/ScrollProgressBar';
 import SectionMinimap from './components/SectionMiniMap';
+import AnimatedSection from './components/AnimatedSection';
+import HomelabArchitectureSection from './components/HomelabArchitectureSection';
+
+interface AppProps {
+  colorMode: PaletteMode;
+  onToggleColorMode: () => void;
+}
 
 const globalStyles = {
   'html': {
@@ -22,22 +30,37 @@ const globalStyles = {
   },
 };
 
-function App() {
+function App({ colorMode, onToggleColorMode }: AppProps) {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Box sx={globalStyles} />
 
-      <Navigation />
+      <Navigation colorMode={colorMode} onToggleColorMode={onToggleColorMode} />
       <ScrollProgressBar />
       <SectionMinimap />
 
       <Box component="main" sx={{ flexGrow: 1 }}>
-        <HeroSection />
-        <ExpertiseSection />
-        <WhyWorkWithMeSection />
-        <AboutMeSection />
-        <ShowcaseSection />
-        <ContactSection />
+        <AnimatedSection>
+          <HeroSection />
+        </AnimatedSection>
+        <AnimatedSection delay={0.05}>
+          <ShowcaseSection />
+        </AnimatedSection>
+        <AnimatedSection delay={0.1}>
+          <ExpertiseSection />
+        </AnimatedSection>
+        <AnimatedSection delay={0.15}>
+          <WhyWorkWithMeSection />
+        </AnimatedSection>
+        <AnimatedSection delay={0.2}>
+          <AboutMeSection />
+        </AnimatedSection>
+        <AnimatedSection delay={0.25}>
+          <HomelabArchitectureSection />
+        </AnimatedSection>
+        <AnimatedSection delay={0.3}>
+          <ContactSection />
+        </AnimatedSection>
       </Box>
 
       <Footer />
