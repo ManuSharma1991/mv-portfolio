@@ -204,7 +204,12 @@ const statusDotLabel = (status: MonitorRuntimeStatus): string => {
     return 'Unknown';
 };
 
-const FILTERS = ['All', 'SRE', 'Infra', 'Security', 'Platform', 'DevOps', 'MERN', 'Frontend', 'Self-Hosting'] as const;
+const normalizeTag = (value: string): string => value.trim().toLowerCase();
+
+const FILTERS: string[] = [
+    'All',
+    ...Array.from(new Set(projects.flatMap((project) => project.tags.map((tag) => tag.trim())))),
+];
 
 const gridContainerVariants = {
     hidden: {},
@@ -217,7 +222,7 @@ const cardVariants = {
 };
 
 const ShowcaseSection: React.FC = () => {
-    const [activeFilter, setActiveFilter] = useState<(typeof FILTERS)[number]>('All');
+    const [activeFilter, setActiveFilter] = useState<string>('All');
     const [monitorStatuses, setMonitorStatuses] = useState<Record<number, MonitorRuntimeStatus>>({});
 
     useEffect(() => {
@@ -265,8 +270,12 @@ const ShowcaseSection: React.FC = () => {
     }, []);
 
     const filteredProjects = useMemo(() => {
-        if (activeFilter === 'All') return projects;
-        return projects.filter((project) => project.tags.includes(activeFilter));
+        if (normalizeTag(activeFilter) === 'all') return projects;
+
+        const normalizedActiveFilter = normalizeTag(activeFilter);
+        return projects.filter((project) =>
+            project.tags.some((tag) => normalizeTag(tag) === normalizedActiveFilter),
+        );
     }, [activeFilter]);
 
     return (
@@ -332,6 +341,7 @@ const ShowcaseSection: React.FC = () => {
                 </Stack>
 
                 <Grid
+                    key={activeFilter}
                     container
                     spacing={4}
                     component={motion.div}
@@ -340,10 +350,10 @@ const ShowcaseSection: React.FC = () => {
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.1 }}
                 >
-                    {filteredProjects.map((project, index) => {
+                    {filteredProjects.map((project) => {
                         const ProjectIcon = project.icon;
                         return (
-                            <Grid key={index} size={{ xs: 12, md: 4 }} component={motion.div} variants={cardVariants}>
+                            <Grid key={project.title} size={{ xs: 12, md: 4 }} component={motion.div} variants={cardVariants}>
                                 <Paper
                                     elevation={3}
                                     sx={{
